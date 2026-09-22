@@ -21,7 +21,20 @@ function gy_enviar_email(string $para, string $assunto, string $html): array
     $nome = gy_env('MAIL_FROM_NAME', 'Gycanic');
 
     if ($driver === 'api') {
-        return gy_email_api($para, $assunto, $html, $de, $nome);
+        $provedor = strtolower(gy_env('MAIL_PROVIDER', 'brevo'));
+        $chave = gy_env($provedor === 'resend' ? 'RESEND_API_KEY' : 'BREVO_API_KEY');
+
+        if ($chave !== '') {
+            return gy_email_api($para, $assunto, $html, $de, $nome);
+        }
+
+        // Sem chave no .env: em vez de travar o cadastro, cai para o mail()
+        // do servidor e registra o aviso no log.
+        gy_email_registrar_falha([
+            'motor' => 'api',
+            'erro' => 'chave da API ausente no .env — usando o mail() do servidor',
+        ]);
+        $driver = 'mail';
     }
 
     if ($driver === 'mail') {
