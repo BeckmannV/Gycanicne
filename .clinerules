@@ -12,7 +12,9 @@ Sistema web acadêmico de gestão de oficinas mecânicas.
 - Deploy: HostGator (uploads via FTP). `larpagem/` é mini-jogo paralelo.
 
 ## Segurança (obrigatório)
-- Nunca versionar: `includes/api/config.php`, `.env`, `error_log`, `.ftpquota` (o padrão `config.php` do `.gitignore` cobre qualquer pasta).
+- Verificação de e-mail: cadastro gera código de 6 dígitos (`includes/verificacao.php`), tela `verificar.php`, endpoints `verificar-email` e `reenviar-codigo`. Motor de envio em `includes/email.php` (`MAIL_DRIVER` no `.env`: `log` / `mail` / `api` com Brevo ou Resend).
+- Envio compartilhado de variáveis: `includes/env.php` (`gy_env()`), usado também pelo `fipe.php`.
+- Nunca versionar: `includes/api/config.php`, `.env`, `error_log`, `.ftpquota`, `mail.log` (o padrão `config.php`/`*.log` do `.gitignore` cobre qualquer pasta).
 - Use `includes/api/config.example.php` como modelo de credenciais.
 - Antes de qualquer `git push`, conferir: `git ls-tree -r --name-only HEAD | grep -iE '(^|/)(config\.php|\.env)$'`.
 

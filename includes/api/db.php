@@ -123,3 +123,19 @@ $pdo->exec(
         CONSTRAINT fk_tblProblemas_servico FOREIGN KEY (servico_id) REFERENCES tblServicos(id) ON DELETE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"
 );
+
+// --- Verificação de e-mail por código -------------------------------------
+try {
+    $pdo->exec("ALTER TABLE tblUsuarios ADD COLUMN email_verificado TINYINT(1) NOT NULL DEFAULT 0");
+    // Contas criadas antes desta atualização já são consideradas confirmadas.
+    $pdo->exec("UPDATE tblUsuarios SET email_verificado = 1");
+} catch (PDOException $e) {
+    // Coluna já existente é ignorada.
+}
+foreach (['codigo_verificacao VARCHAR(64) DEFAULT NULL', 'codigo_expira_em DATETIME DEFAULT NULL'] as $coluna) {
+    try {
+        $pdo->exec("ALTER TABLE tblUsuarios ADD COLUMN $coluna");
+    } catch (PDOException $e) {
+        // Coluna já existente é ignorada.
+    }
+}

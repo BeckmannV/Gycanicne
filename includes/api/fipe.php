@@ -20,18 +20,9 @@ if (!isset($_SESSION['usuario_id'])) {
     exit;
 }
 
-// --- .env (opcional) ------------------------------------------------
-$env = [];
-$envFile = dirname(__DIR__, 2) . '/.env';
-if (is_file($envFile)) {
-    foreach (file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $linha) {
-        $linha = trim($linha);
-        if ($linha === '' || str_starts_with($linha, '#') || !str_contains($linha, '=')) continue;
-        [$chave, $valor] = explode('=', $linha, 2);
-        $env[trim($chave)] = trim($valor);
-    }
-}
-$token = $env['FIPE_API_TOKEN'] ?? getenv('FIPE_API_TOKEN') ?: '';
+// --- .env (opcional) — lido pelo compartilhado includes/env.php ---------
+require_once __DIR__ . '/../env.php';
+$token = gy_env('FIPE_API_TOKEN');
 
 function fipeRequisitar(string $url, string $token = ''): array {
     $headers = ['Accept: application/json'];

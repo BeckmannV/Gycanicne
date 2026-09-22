@@ -36,7 +36,8 @@ if ($verifica->fetch()) {
 }
 
 $stmt = $pdo->prepare(
-    'INSERT INTO tblUsuarios (nome, email, senha, cargo) VALUES (:nome, :email, :senha, :cargo)'
+    'INSERT INTO tblUsuarios (nome, email, senha, cargo, email_verificado)
+     VALUES (:nome, :email, :senha, :cargo, 0)'
 );
 $stmt->execute([
     ':nome' => $nome,
@@ -44,9 +45,14 @@ $stmt->execute([
     ':senha' => password_hash($senha, PASSWORD_DEFAULT),
     ':cargo' => 'usuario',
 ]);
-$_SESSION['usuario_id'] = (int) $pdo->lastInsertId();
-$_SESSION['usuario_nome'] = $nome;
-$_SESSION['usuario_email'] = $email;
-$_SESSION['usuario_tipo'] = 'usuario';
-header('Location: oficinas.php');
+
+// Envia o código de verificação; o acesso só é liberado na tela verificar.php.
+require_once __DIR__ . '/../verificacao.php';
+$envio = gy_enviar_verificacao($pdo, [
+    'id' => (int) $pdo->lastInsertId(),
+    'nome' => $nome,
+    'email' => $email,
+]);
+
+header('Location: verificar.php?email=' . urlencode($email) . ($envio['ok'] ? '&enviado=1' : '&erro=email_falhou'));
 exit;

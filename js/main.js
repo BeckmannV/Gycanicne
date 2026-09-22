@@ -206,7 +206,8 @@
       sucesso: {
         os_criada: 'Ordem de serviço criada com sucesso.',
         oficina_criada: 'Oficina cadastrada com sucesso.',
-        funcionario_criado: 'Funcionário cadastrado com sucesso.'
+        funcionario_criado: 'Funcionário cadastrado com sucesso.',
+        codigo_enviado: 'Código enviado! Confira a caixa de entrada do seu e-mail.'
       },
       erro: {
         acesso: 'Faça login para continuar.',
@@ -215,7 +216,11 @@
         senha_curta: 'A senha deve ter no mínimo 6 caracteres.',
         senhas_diferentes: 'As senhas informadas não coincidem.',
         email_existe: 'Já existe uma conta com este e-mail.',
-        dados_invalidos: 'Alguns dados informados são inválidos. Confira e tente novamente.'
+        dados_invalidos: 'Alguns dados informados são inválidos. Confira e tente novamente.',
+        codigo_invalido: 'Código incorreto. Confira o e-mail e tente novamente.',
+        codigo_expirado: 'O código expirou. Peça um novo código abaixo.',
+        limite_envios: 'Aguarde 1 minuto antes de solicitar outro código.',
+        email_falhou: 'Não foi possível enviar o código de verificação. Tente novamente.'
       }
     };
 

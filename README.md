@@ -16,7 +16,7 @@ acompanhamento dos problemas identificados em cada veículo.
 
 | Caminho | Descrição |
 | --- | --- |
-| `*.php` | Páginas do sistema (`index`, `login`, `cadastro`, `perfil`, `funcionarios`, `oficinas`, `oficina-detalhe`, `servicos`, `servicos-lista`, `adicionar-*`, `editar-funcionario`) |
+| `*.php` | Páginas do sistema (`index`, `login`, `cadastro`, `verificar`, `perfil`, `funcionarios`, `oficinas`, `oficina-detalhe`, `servicos`, `servicos-lista`, `adicionar-*`, `editar-funcionario`) |
 | `includes/` | Layout compartilhado: `topo.php` (cabeçalho + menu), `sidebar.php`, `rodape.php` e `auth.php` (sessão) |
 | `css/style.css` | Tema escuro/laranja (antes repetido dentro de cada página) |
 | `js/main.js` | Todo o JavaScript do site (antes repetido dentro de cada página) |
@@ -77,10 +77,35 @@ FIPE_API_URL=https://fipe.parallelum.com.br/api/v2
 FIPE_API_TOKEN=
 IMAGE_API_URL=https://commons.wikimedia.org/w/api.php
 IMAGE_API_KEY=
+
+# Verificação de e-mail (ver "Verificação de e-mail" abaixo)
+MAIL_DRIVER=log
+MAIL_PROVIDER=brevo
+MAIL_FROM=nao-responda@gycanic.com.br
+MAIL_FROM_NAME=Gycanic
+BREVO_API_KEY=
+RESEND_API_KEY=
 ```
 
 O `FIPE_API_TOKEN` é opcional (a API funciona sem token, com limite menor de
 requisições).
+
+## Verificação de e-mail
+
+Ao criar a conta o sistema gera um código de 6 dígitos (validade de 15
+minutos), envia por e-mail e só libera o acesso depois da confirmação na tela
+`verificar.php`. Quem tenta logar sem confirmar recebe um novo código.
+
+- **Código:** `includes/verificacao.php` — guardado no banco como hash SHA-256.
+- **Envio:** `includes/email.php`, com o motor escolhido no `.env`:
+  - `MAIL_DRIVER=log` (padrão): não envia; grava o texto em `includes/api/mail.log` (desenvolvimento);
+  - `MAIL_DRIVER=mail`: usa a função `mail()` do servidor (a HostGator envia sem chave);
+  - `MAIL_DRIVER=api` + `MAIL_PROVIDER=brevo|resend`: envia por API e exige a chave no `.env`.
+- **Campos novos** em `tblUsuarios` (`email_verificado`, `codigo_verificacao`,
+  `codigo_expira_em`) são criados automaticamente pelo `includes/api/db.php`;
+  contas antigas já são consideradas confirmadas.
+- Limite de 1 reenvio por minuto por sessão; a comparação de validade usa o
+  relógio do banco (evita diferença de fuso).
 
 ## Requisitos
 

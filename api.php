@@ -40,6 +40,8 @@ $acoes = [
     'servicos',
     'stats',
     'veiculos',
+    'reenviar-codigo',
+    'verificar-email',
 ];
 
 if (!in_array($acao, $acoes, true)) {

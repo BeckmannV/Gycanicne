@@ -16,11 +16,25 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL) || $senha === '') {
     exit;
 }
 
-$stmt = $pdo->prepare('SELECT id, nome, email, senha, cargo FROM tblUsuarios WHERE email = :email LIMIT 1');
+$stmt = $pdo->prepare(
+    'SELECT id, nome, email, senha, cargo, email_verificado
+       FROM tblUsuarios WHERE email = :email LIMIT 1'
+);
 $stmt->execute([':email' => $email]);
 $usuario = $stmt->fetch();
 if (!$usuario || !password_verify($senha, $usuario['senha'])) {
     header('Location: login.php?erro=1');
+    exit;
+}
+
+// Conta ainda não confirmada: reenvia o código e manda para a tela de verificação.
+if ((int) $usuario['email_verificado'] !== 1) {
+    require_once __DIR__ . '/../verificacao.php';
+    $envio = gy_enviar_verificacao($pdo, $usuario);
+    $_SESSION['ultimo_envio'] = time();
+
+    $destino = 'verificar.php?email=' . urlencode($email);
+    header('Location: ' . $destino . ($envio['ok'] ? '&reenviado=1' : '&erro=email_falhou'));
     exit;
 }
 
