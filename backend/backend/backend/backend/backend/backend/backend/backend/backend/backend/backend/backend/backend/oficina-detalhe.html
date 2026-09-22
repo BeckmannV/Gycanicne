@@ -1,0 +1,1855 @@
+<!doctype html>
+<html lang="pt-BR" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Gycanic | Oficina</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      /* Tema Gycanic: paleta escura do site publicado + laranja #f97316 */
+      [data-bs-theme="dark"] {
+        --bs-warning: #f97316;
+        --bs-warning-rgb: 249,115,22;
+        --bs-body-bg: #081c28;
+        --bs-border-color: #1d3a4d;
+        --bs-secondary-color: rgba(154, 171, 194, 0.75);
+        --bs-emphasis-color: #f8fafc;
+        --bs-body-font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+      }
+      .card {
+        --bs-card-bg: #0a2230;
+      }
+      aside.sticky-md-top {
+        background-color: #06121c;
+        width: 250px;
+        min-width: 250px;
+        max-width: 250px;
+      }
+      @media (max-width: 767.98px) {
+        aside.sticky-md-top {
+          width: 100%;
+          min-width: 0;
+          max-width: 100%;
+        }
+      }
+      .form-control,
+      .form-select {
+        background-color: #102c3d;
+        border-color: #1d3a4d;
+        color: #f8fafc;
+      }
+      .form-control:focus,
+      .form-select:focus {
+        background-color: #102c3d;
+        border-color: #2a4d66;
+        color: #f8fafc;
+      }
+      .btn-warning {
+        --bs-btn-color: #3b1a05;
+        --bs-btn-bg: #fb923c;
+        --bs-btn-border-color: #fb923c;
+        --bs-btn-hover-color: #3b1a05;
+        --bs-btn-hover-bg: #f97316;
+        --bs-btn-hover-border-color: #f97316;
+        --bs-btn-focus-shadow-rgb: 249,115,22;
+        --bs-btn-active-color: #3b1a05;
+        --bs-btn-active-bg: #ea580c;
+        --bs-btn-active-border-color: #ea580c;
+        --bs-btn-disabled-color: #3b1a05;
+        --bs-btn-disabled-bg: #fb923c;
+        --bs-btn-disabled-border-color: #fb923c;
+        --bs-btn-border-radius: 12px;
+        --bs-btn-font-weight: 700;
+        --bs-btn-padding-y: 11px;
+        --bs-btn-padding-x: 17px;
+      }
+      .btn-outline-warning {
+        --bs-btn-color: #3b1a05;
+        --bs-btn-bg: #fb923c;
+        --bs-btn-border-color: #fb923c;
+        --bs-btn-hover-color: #3b1a05;
+        --bs-btn-hover-bg: #f97316;
+        --bs-btn-hover-border-color: #f97316;
+        --bs-btn-focus-shadow-rgb: 249,115,22;
+        --bs-btn-active-color: #3b1a05;
+        --bs-btn-active-bg: #ea580c;
+        --bs-btn-active-border-color: #ea580c;
+        --bs-btn-border-radius: 12px;
+        --bs-btn-font-weight: 700;
+        --bs-btn-padding-y: 11px;
+        --bs-btn-padding-x: 17px;
+      }
+      select option {
+        background-color: #0a2230;
+        color: #f8fafc;
+      }
+      aside .nav-link {
+        color: #b9c7da;
+      }
+      aside .nav-link:hover {
+        color: #ffffff;
+        background-color: rgba(249, 115, 22, 0.15);
+      }
+      /* Sidebar full-height apenas no desktop; no mobile fica com altura natural */
+      @media (min-width: 768px) {
+        .gy-sidebar {
+          min-height: 100vh;
+          position: sticky;
+          top: 0;
+          align-self: flex-start;
+          max-height: 100vh;
+          overflow-y: auto;
+          scrollbar-width: thin;
+        }
+      }
+      /* Botao Entrar: alinhamento vertical do texto + icone */
+      .btn-default-gy {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      /* Alertas via query string: dentro do layout, nunca no <body> */
+      body > .alert-dismissible {
+        display: none !important;
+      }
+      /* Sombra lateral da sidebar (igual a producao) */
+      aside.gy-sidebar {
+        box-shadow: 4px 0 18px rgba(0, 0, 0, 0.28);
+    
+      .text-accent {
+        -webkit-text-fill-color: #ea580c;
+      }
+      .gy-topbar-avatar {
+        color: #7c2d12;
+        background-color: var(--bs-warning);
+        border: 2px solid rgba(251, 146, 60, 0.35);
+        font-weight: 800;
+      }
+      .gy-stat-underline::after {
+        content: "";
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--bs-warning);
+        margin-top: 14px;
+      }
+      .text-bg-warning {
+        color: #3b1a05 !important;
+      }
+    </style>
+
+  </head>
+  <body class="d-flex flex-column flex-md-row bg-body" data-protected-page>
+    <!-- Página protegida: a sessão é validada pelo main.js. -->
+    <aside class="d-flex flex-column flex-shrink-0 p-3 border-end border-secondary gy-sidebar col-md-3 col-lg-2">
+      <a href="index.html" class="fs-4 fw-bolder text-decoration-none text-white d-flex align-items-center mb-3">
+        <span class="text-warning">Gy</span>canic
+      </a>
+      <ul class="nav flex-column gap-1">
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center gap-2 rounded-3 px-3 py-2 text-white-50" href="index.html"><i class="bi bi-house-door"></i> Início</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center gap-2 rounded-3 px-3 py-2 bg-warning text-white fw-semibold" href="oficinas.html"><i class="bi bi-wrench"></i> Oficinas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center gap-2 rounded-3 px-3 py-2 text-white-50" href="funcionarios.html"><i class="bi bi-people"></i> Funcionários</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center gap-2 rounded-3 px-3 py-2 text-white-50" href="perfil.html"><i class="bi bi-person"></i> Perfil</a>
+        </li>
+      </ul>
+      <div class="mt-auto pt-3">
+        <a href="login.html" data-logout class="btn btn-warning w-100"><i class="bi bi-box-arrow-right"></i> Sair</a>
+      </div>
+    </aside>
+    <main class="flex-grow-1 min-vh-100">
+      <section class="container-xl py-4">
+        <!-- Resumo da oficina (preenchido pelo main.js) e atalhos. -->
+        <header class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-4">
+          <div>
+            <p class="text-warning text-uppercase fw-semibold small mb-1">Visão geral</p>
+            <h1 class="h2 fw-bold mb-0">Minha oficina</h1>
+          </div>
+          <a href="oficinas.html" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Voltar</a>
+        </header>
+
+        <div class="card bg-dark border-secondary rounded-4 overflow-hidden position-relative mb-4">
+          <img src="public/banners/oficina.jpg" alt="" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" />
+          <div class="position-absolute top-0 start-0 w-100 h-100 bg-black bg-opacity-75"></div>
+          <div class="card-body position-relative z-2 p-4 p-lg-5">
+            <p class="text-warning text-uppercase fw-semibold small mb-1">Unidade principal</p>
+            <h2 class="display-6 fw-bold mb-2" data-oficina-nome>Pronta para configurar</h2>
+            <p class="text-white-50 mb-0" data-oficina-info>
+              Inclua os dados da sua oficina para visualizar as informações aqui.
+            </p>
+          </div>
+        </div>        <div class="row g-3">
+          <div class="col-md-4">
+            <a href="servicos-lista.html" class="card bg-dark border-secondary rounded-4 h-100 text-decoration-none overflow-hidden">
+              <img src="public/banners/tile-servicos.jpg" alt="" class="w-100 object-fit-cover" height="120" />
+              <div class="card-body p-4">
+                <i class="bi bi-list-check display-6 text-warning"></i>
+                <h3 class="h5 fw-bold mt-3 mb-1">Serviços</h3>
+                <p class="text-secondary small mb-0">Acompanhe as ordens de serviço em andamento.</p>
+              </div>
+              <div class="card-footer bg-transparent border-secondary small fw-semibold text-warning">
+                Gerenciar serviços <i class="bi bi-arrow-right"></i>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a href="funcionarios.html" class="card bg-dark border-secondary rounded-4 h-100 text-decoration-none overflow-hidden">
+              <img src="public/banners/tile-equipe.jpg" alt="" class="w-100 object-fit-cover" height="120" />
+              <div class="card-body p-4">
+                <i class="bi bi-people display-6 text-warning"></i>
+                <h3 class="h5 fw-bold mt-3 mb-1">Equipe</h3>
+                <p class="text-secondary small mb-0">Veja e gerencie quem faz parte da operação.</p>
+              </div>
+              <div class="card-footer bg-transparent border-secondary small fw-semibold text-warning">
+                Ver funcionários <i class="bi bi-arrow-right"></i>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a href="perfil.html" class="card bg-dark border-secondary rounded-4 h-100 text-decoration-none overflow-hidden">
+              <img src="public/banners/tile-config.jpg" alt="" class="w-100 object-fit-cover" height="120" />
+              <div class="card-body p-4">
+                <i class="bi bi-gear display-6 text-warning"></i>
+                <h3 class="h5 fw-bold mt-3 mb-1">Configurações</h3>
+                <p class="text-secondary small mb-0">Ajuste seus dados de acesso e preferências.</p>
+              </div>
+              <div class="card-footer bg-transparent border-secondary small fw-semibold text-warning">
+                Abrir perfil <i class="bi bi-arrow-right"></i>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+/**
+ * =============================================================
+ * ARQUIVO: main.js
+ * VERSÃO: 2.0 (Unificada - apenas JavaScript puro, sem jQuery)
+ * DESCRIÇÃO: Funcionalidades principais do site Gycanic.
+ *
+ *  - Sidebar com persistência em localStorage + modo mobile
+ *  - Proteção de páginas e logout
+ *  - Máscaras de formulário (telefone, CEP, CPF/CNPJ)
+ *  - Abas (Bootstrap e nativas)
+ *  - Oficinas: listagem por cards
+ *  - Funcionários: tabela, filtros, cadastro/edição/exclusão
+ *  - Serviços (OS): seletor, detalhes, problemas (adicionar/status/excluir)
+ *  - Nova OS: responsável + autocomplete de veículo (catálogo FIPE)
+ *  - Perfil: carregar/salvar nome + foto
+ *  - Home: stats + identidade do usuário na sidebar
+ * =============================================================
+ */
+(function () {
+  'use strict';
+
+  var body = document.body;
+
+  /* ----------------------------------------------------------
+   * Utilitários
+   * ---------------------------------------------------------- */
+  function gyEsc(valor) {
+    if (valor === null || valor === undefined) return '';
+    return String(valor)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  /* Retorna a foto do veículo via backend/veiculos.php?foto= (Wikimedia Commons,
+   * com cache local no servidor — cobre qualquer modelo do catálogo).
+   * Uso: gyVeiculoFoto(texto, function(url){ ... }); — o callback recebe a URL
+   * da foto ou null. */
+  function gyVeiculoFoto(texto, cb) {
+    try {
+      fetch('backend/veiculos.php?foto=' + encodeURIComponent(String(texto || '')))
+        .then(function (r) { return r.json(); })
+        .then(function (d) { cb(d && d.url ? d.url : null); })
+        .catch(function () { cb(null); });
+    } catch (e) {
+      cb(null);
+    }
+  }
+
+  /* Retorna uma foto de avatar determinística para o cliente (hash do nome).
+   * Fotos reais do randomuser.me (0–99, homens/mulheres). */
+  function gyFotoCliente(nome) {
+    var s = String(nome || '').trim();
+    if (!s) return '';
+    var h = 0;
+    for (var i = 0; i < s.length; i++) {
+      h = (h * 31 + s.charCodeAt(i)) >>> 0;
+    }
+    var genero = h % 2 === 0 ? 'men' : 'women';
+    var indice = h % 100;
+    return 'https://randomuser.me/api/portraits/' + genero + '/' + indice + '.jpg';
+  }
+
+  function formatarData(valor) {
+    if (!valor) return '—';
+    var d = new Date(String(valor).replace(' ', 'T') + (String(valor).includes('T') ? '' : 'Z'));
+    if (isNaN(d.getTime())) return gyEsc(valor);
+    return d.toLocaleDateString('pt-BR');
+  }
+
+  function formatarTelefone(valor) {
+    if (!valor) return '—';
+    var d = String(valor).replace(/\D/g, '');
+    if (d.length === 11) {
+      return '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7);
+    }
+    if (d.length === 10) {
+      return '(' + d.slice(0, 2) + ') ' + d.slice(2, 6) + '-' + d.slice(6);
+    }
+    return gyEsc(valor);
+  }
+
+  var PALETA_AVATAR = [
+    'text-bg-warning',
+    'text-bg-info',
+    'text-bg-success',
+    'text-bg-secondary',
+    'text-bg-danger',
+    'text-bg-dark',
+    'text-bg-primary',
+    'text-bg-light'
+  ];
+
+  function corDoNome(nome) {
+    var s = String(nome || '?');
+    var h = 0;
+    for (var i = 0; i < s.length; i++) {
+      h = (h * 31 + s.charCodeAt(i)) >>> 0;
+    }
+    return PALETA_AVATAR[h % PALETA_AVATAR.length];
+  }
+
+  function iniciais(nome) {
+    var partes = String(nome || '').trim().split(/\s+/).filter(Boolean);
+    if (!partes.length) return '?';
+    if (partes.length === 1) return partes[0].slice(0, 2).toUpperCase();
+    return (partes[0][0] + partes[partes.length - 1][0]).toUpperCase();
+  }
+
+  function montarAvatar(el, nome, foto) {
+    if (!el) return;
+    el.classList.add('rounded-circle', 'fw-bold', corDoNome(nome));
+    el.textContent = iniciais(nome);
+    if (foto) {
+      var tamanho = parseInt(el.getAttribute('data-avatar-size'), 10) || 48;
+      var img = new Image();
+      img.alt = String(nome || '');
+      img.className = 'rounded-circle object-fit-cover';
+      img.width = tamanho;
+      img.height = tamanho;
+      img.onload = function () {
+        el.textContent = '';
+        el.appendChild(img);
+      };
+      img.src = foto;
+    }
+  }
+
+  /* ----------------------------------------------------------
+   * 1. SIDEBAR - toggle + persistência
+   * ---------------------------------------------------------- */
+  function applySidebarState() {
+    var stored = null;
+    try {
+      stored = window.localStorage.getItem('gy_sidebar_collapsed');
+    } catch (e) { /* ignora */ }
+    if (stored === '1') {
+      body.classList.add('sidebar-collapse');
+    } else if (stored === '0') {
+      body.classList.remove('sidebar-collapse');
+    }
+  }
+
+  function bindSidebarToggle() {
+    var toggles = document.querySelectorAll('[data-sidebar-toggle]');
+    toggles.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        body.classList.toggle('sidebar-collapse');
+        try {
+          window.localStorage.setItem(
+            'gy_sidebar_collapsed',
+            body.classList.contains('sidebar-collapse') ? '1' : '0'
+          );
+        } catch (e) { /* ignora */ }
+      });
+    });
+
+    /* Menu mobile: abre/fecha a sidebar em telas pequenas. */
+    var mobileBtns = document.querySelectorAll('[data-mobile-menu-btn]');
+    mobileBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        body.classList.toggle('sidebar-open');
+      });
+    });
+    if (mobileBtns.length && body.classList.contains('sidebar-open')) {
+      body.classList.remove('sidebar-open');
+    }
+    document.addEventListener('click', function (evento) {
+      if (!body.classList.contains('sidebar-open')) return;
+      if (evento.target.closest('.main-sidebar') || evento.target.closest('[data-mobile-menu-btn]')) return;
+      body.classList.remove('sidebar-open');
+    });
+  }
+
+  applySidebarState();
+  bindSidebarToggle();
+
+  /* ----------------------------------------------------------
+   * 2. MENSAGEM DE ERRO NO LOGIN
+   * ---------------------------------------------------------- */
+  var errorBox = document.querySelector('[data-login-error]');
+  if (errorBox) {
+    var params = new URLSearchParams(window.location.search);
+    var mensagens = {
+      '1': 'Credenciais inválidas. Verifique e-mail e senha.',
+      acesso: 'Faça login para continuar.'
+    };
+    if (params.get('erro') && mensagens[params.get('erro')]) {
+      errorBox.textContent = mensagens[params.get('erro')];
+      errorBox.classList.remove('d-none');
+    }
+  }
+
+  /* ----------------------------------------------------------
+   * 2b. MENSAGENS DE SUCESSO/ERRO VIA QUERY STRING
+   *     (usadas pelos POSTs nativos: adicionar-servico, oficina, funcionário)
+   * ---------------------------------------------------------- */  (function () {
+    var qp = new URLSearchParams(window.location.search);
+    var sucesso = qp.get('sucesso');
+    var erro = qp.get('erro');
+    if (!sucesso && !erro) return;
+
+    var msgs = {
+      sucesso: {
+        os_criada: 'Ordem de serviço criada com sucesso.',
+        oficina_criada: 'Oficina cadastrada com sucesso.',
+        funcionario_criado: 'Funcionário cadastrado com sucesso.'
+      },
+      erro: {
+        acesso: 'Faça login para continuar.',
+        sem_permissao: 'Apenas gerentes podem executar esta ação.',
+        campos_vazios: 'Preencha todos os campos obrigatórios.',
+        senha_curta: 'A senha deve ter no mínimo 6 caracteres.',
+        senhas_diferentes: 'As senhas informadas não coincidem.',
+        email_existe: 'Já existe uma conta com este e-mail.',
+        dados_invalidos: 'Alguns dados informados são inválidos. Confira e tente novamente.'
+      }
+    };
+
+    var texto = null;
+    var tipo = null;
+    if (sucesso && msgs.sucesso[sucesso]) {
+      texto = msgs.sucesso[sucesso];
+      tipo = 'ok';
+    } else if (erro && msgs.erro[erro]) {
+      texto = msgs.erro[erro];
+      tipo = 'erro';
+    }
+    if (!texto) return;
+
+    var destino = document.querySelector('main .container-xl, main .container') || document.querySelector('main') || document.body;
+    var alerta = document.createElement('div');
+    alerta.className =
+      'alert alert-dismissible fade show ' + (tipo === 'ok' ? 'alert-success' : 'alert-danger');
+    alerta.setAttribute('role', tipo === 'erro' ? 'alert' : 'status');
+    alerta.innerHTML =
+      '<i class="bi ' + (tipo === 'ok' ? 'bi-check-circle-fill' : 'bi-exclamation-circle-fill') + ' me-1"></i>' +
+      gyEsc(texto) +
+      '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>';
+    destino.insertBefore(alerta, destino.firstChild);
+
+    try {
+      window.history.replaceState({}, '', window.location.pathname);
+    } catch (e) { /* URL pode conter hash — mantém */ }
+  })();
+
+  /* ----------------------------------------------------------
+   * 2c. CADASTRO - validação client-side de senha
+   * ---------------------------------------------------------- */
+  (function () {
+    var formCadastro = document.querySelector('[data-validate-senha]');
+    if (!formCadastro) return;
+    var senhaIn = formCadastro.querySelector('#senha');
+    var confirmaIn = formCadastro.querySelector('#confirmar-senha');
+    var alerta = formCadastro.querySelector('#cadastro-alert');
+    var btn = formCadastro.querySelector('[type="submit"]');
+    function avisar(texto) {
+      if (!alerta) return;
+      alerta.textContent = texto || '';
+      alerta.className = texto ? 'alert alert-danger' : 'd-none';
+    }
+    formCadastro.addEventListener('submit', function (e) {
+      if (!senhaIn || !confirmaIn) return;
+      if (confirmaIn.value !== senhaIn.value) {
+        e.preventDefault();
+        avisar('As senhas não coincidem. Verifique e tente novamente.');
+        confirmaIn.focus();
+        return;
+      }
+      if (senhaIn.value.length < 6) {
+        e.preventDefault();
+        avisar('A senha deve ter no mínimo 6 caracteres.');
+        senhaIn.focus();
+        return;
+      }
+      avisar('');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Criando conta...';
+      }
+    });
+  })();
+
+  /* ----------------------------------------------------------
+   * 3. PROTEÇÃO DE PÁGINAS
+   * ---------------------------------------------------------- */
+  (function () {
+    var avisoAuth = document.querySelector('[data-login-alert]');
+    if (!avisoAuth) return;
+    var qs = new URLSearchParams(window.location.search);
+    if (qs.get('auth')) {
+      avisoAuth.textContent = 'Fa\u00e7a login para acessar esta p\u00e1gina.';
+      avisoAuth.className = 'alert alert-warning mt-3';
+    }
+  })();
+
+  var isProtected = body.hasAttribute('data-protected-page');
+  if (isProtected) {
+    fetch('backend/auth.php', {
+      credentials: 'same-origin',
+      cache: 'no-store'
+    })
+      .then(function (res) {
+        if (!res.ok) throw new Error('http');
+        return res.json();
+      })
+      .then(function (data) {
+        if (!data || data.authenticated !== true) {
+          throw new Error('nao_autenticado');
+        }
+        preencherIdentidadeSidebar(data.usuario);
+      })
+      .catch(function () {
+        window.location.href = 'index.html?auth=1';
+      });
+  }
+
+  /* ----------------------------------------------------------
+   * 4. LOGOUT
+   * ---------------------------------------------------------- */
+  var logoutBtns = document.querySelectorAll('[data-logout]');
+  logoutBtns.forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      fetch('backend/logout.php', {
+        method: 'GET',
+        credentials: 'same-origin',
+        cache: 'no-store'
+      })
+        .catch(function () { /* segue o fluxo mesmo se falhar */ })
+        .then(function () {
+          window.location.href = 'login.html';
+        });
+    });
+  });
+
+  /* ----------------------------------------------------------
+   * 5. IDENTIDADE NA SIDEBAR (páginas internas)
+   * ---------------------------------------------------------- */
+  function preencherIdentidadeSidebar(usuario) {
+    var card = document.querySelector('[data-sidebar-user]');
+    if (card && usuario) {
+      var nomeEl = card.querySelector('[data-sidebar-user-name]');
+      var roleEl = card.querySelector('[data-sidebar-user-role]');
+      if (nomeEl) nomeEl.textContent = usuario.nome || 'Usuário';
+      if (roleEl) {
+        var rotulo = { gerente: 'Gerente', funcionario: 'Funcionário', usuario: 'Usuário' };
+        roleEl.textContent = rotulo[usuario.tipo] || 'Usuário';
+      }
+      var av = card.querySelector('[data-sidebar-user-avatar]');
+      if (av) montarAvatar(av, usuario.nome, usuario.foto);
+    }
+  }
+
+  /* ----------------------------------------------------------
+   * 5b. IDENTIDADE NA SIDEBAR (páginas públicas, ex: home)
+   * ---------------------------------------------------------- */
+  var sidebarUserCard = document.querySelector('[data-sidebar-user]');
+  if (sidebarUserCard && !isProtected) {
+    fetch('backend/auth.php', {
+      credentials: 'same-origin',
+      cache: 'no-store'
+    })
+      .then(function (r) {
+        return r.json();
+      })
+      .then(function (d) {
+        if (d && d.authenticated && d.usuario) {
+          preencherIdentidadeSidebar(d.usuario);
+          var nomeTopo = document.getElementById('gy-topbar-name');
+          if (nomeTopo) nomeTopo.textContent = (d.usuario.nome || '').split(' ')[0];
+          var avatarTopo = document.getElementById('gy-topbar-avatar');
+          if (avatarTopo) montarAvatar(avatarTopo, d.usuario.nome, d.usuario.foto);
+          var logoutContainer = document.getElementById('sidebar-actions-container');
+          if (logoutContainer && !logoutContainer.querySelector('[data-logout]')) {
+            logoutContainer.innerHTML =
+              '<a href="login.html" data-logout class="btn btn-warning w-100 mt-2"><i class="bi bi-box-arrow-right"></i> Sair</a>';
+          }
+          var heroH1 = document.querySelector('[data-hero-title]');
+          if (heroH1) {
+            heroH1.innerHTML = 'Ol\u00e1, <span class="text-warning">' + gyEsc(d.usuario.nome) + '</span>. Vamos colocar tudo em ordem?';
+          }
+        }
+      })
+      .catch(function () { /* mantém "Visitante" */ });
+  }
+
+  /* ----------------------------------------------------------
+   * 6. MÁSCARAS
+   * ---------------------------------------------------------- */
+  document.querySelectorAll('[data-mask-phone]').forEach(function (input) {
+    input.addEventListener('input', function () {
+      var d = input.value.replace(/\D/g, '').slice(0, 11);
+      if (d.length > 10) {
+        input.value = '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7);
+      } else if (d.length > 6) {
+        input.value = '(' + d.slice(0, 2) + ') ' + d.slice(2, 6) + '-' + d.slice(6);
+      } else if (d.length > 2) {
+        input.value = '(' + d.slice(0, 2) + ') ' + d.slice(2);
+      } else if (d.length > 0) {
+        input.value = '(' + d;
+      } else {
+        input.value = '';
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-mask-cep]').forEach(function (input) {
+    input.addEventListener('input', function () {
+      var d = input.value.replace(/\D/g, '').slice(0, 8);
+      input.value = d.length > 5 ? d.slice(0, 5) + '-' + d.slice(5) : d;
+    });
+  });
+
+  document.querySelectorAll('[data-mask-documento]').forEach(function (input) {
+    input.addEventListener('input', function () {
+      var d = input.value.replace(/\D/g, '');
+      if (d.length <= 11) {
+        input.value = d
+          .replace(/(\d{3})(\d)/, '$1.$2')
+          .replace(/(\d{3})(\d)/, '$1.$2')
+          .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+      } else {
+        d = d.slice(0, 14);
+        input.value = d
+          .replace(/(\d{2})(\d)/, '$1.$2')
+          .replace(/(\d{3})(\d)/, '$1.$2')
+          .replace(/(\d{3})(\d)/, '$1/$2')
+          .replace(/(\d{4})(\d{1,2})$/, '$1-$2');
+      }
+    });
+  });
+
+  /* ----------------------------------------------------------
+   * 7. ABAS (Bootstrap e nativas)
+   * ---------------------------------------------------------- */
+  function alternarAba(gatilho) {
+    var alvo = gatilho.getAttribute('data-target') || gatilho.getAttribute('href');
+    var grupo = gatilho.closest('.nav-tabs, [role="tablist"]');
+    if (grupo) {
+      grupo.querySelectorAll('.active, .is-active').forEach(function (el) {
+        el.classList.remove('active', 'is-active');
+      });
+      var parent = gatilho.parentElement;
+      if (parent) parent.classList.add('active');
+      gatilho.classList.add('active');
+    }
+    gatilho.classList.add('is-active');
+
+    if (!alvo || alvo.indexOf('#') !== 0) return;
+    var painel = document.querySelector(alvo);
+    if (!painel) return;
+
+var container = painel.closest('.tab-content');
+    if (container) {
+      container.querySelectorAll('.tab-pane').forEach(function (p) {
+        p.classList.remove('active');
+        p.style.display = 'none';
+      });
+    }
+    painel.classList.add('active');
+    painel.style.display = 'block';
+  }
+
+  document.querySelectorAll('[data-toggle="tab"], [data-tab-btn]').forEach(function (gatilho) {
+    gatilho.addEventListener('click', function (e) {
+      if (gatilho.hasAttribute('data-toggle') && gatilho.getAttribute('href') === '#') {
+        e.preventDefault();
+      }
+      alternarAba(gatilho);
+    });
+  });
+
+  /* Marca a aba ativa inicialmente (sem Bootstrap). */
+  document.querySelectorAll('[data-tab-btn].is-active').forEach(function (gatilho) {
+    alternarAba(gatilho);
+  });
+
+  /* ----------------------------------------------------------
+   * 8. OFICINAS (listagem)
+   * ---------------------------------------------------------- */
+  var officeGrid = document.querySelector('[data-office-grid]');
+  if (officeGrid) {
+    fetch('backend/oficinas.php', { credentials: 'same-origin' })
+      .then(function (r) {
+        return r.json();
+      })
+      .then(function (oficinas) {
+        if (!Array.isArray(oficinas) || !oficinas.length) {
+          officeGrid.innerHTML =
+            '<div class="col-12"><div class="text-center text-secondary py-5 my-4">' +
+            '<i class="bi bi-buildings display-6 text-warning"></i>' +
+            '<h3 class="h5 fw-bold text-white mt-3">Nenhuma oficina cadastrada</h3>' +
+            '<p class="mb-3">Tente alterar os filtros ou cadastrar uma nova oficina.</p>' +
+            '<a class="btn btn-success" href="adicionar-oficina.html"><i class="bi bi-plus-lg"></i> Nova oficina</a>' +
+            '</div></div>';
+          return;
+        }
+        officeGrid.innerHTML = oficinas
+          .map(function (o) {
+            return (
+              '<div class="col">' +
+              '<article class="card border-0 shadow-sm h-100">' +
+              '<div class="card-body">' +
+              '<div class="text-warning fs-4 mb-2"><i class="bi bi-wrench"></i></div>' +
+              '<h3 class="h5 fw-bold card-title">' + gyEsc(o.nome) + '</h3>' +
+              '<p class="card-text text-secondary mb-1"><i class="bi bi-envelope"></i> ' + gyEsc(o.email) + '</p>' +
+              '<p class="card-text text-secondary mb-0"><i class="bi bi-geo-alt"></i> CEP ' + gyEsc(o.cep || '—') + '</p>' +
+              '</div>' +
+              '<div class="card-footer bg-white border-0 d-flex justify-content-between align-items-center">' +
+              '<small class="text-secondary">' + formatarData(o.criado_em) + '</small>' +
+              '<a class="btn btn-sm btn-outline-warning" href="oficina-detalhe.html">Ver unidade <i class="bi bi-arrow-right"></i></a>' +
+              '</div>' +
+              '</article>' +
+              '</div>'
+            );
+          })
+          .join('');
+      })
+      .catch(function () {
+        officeGrid.innerHTML =
+          '<div class="col-12"><div class="text-center text-secondary py-5 my-4">' +
+          '<i class="bi bi-exclamation-triangle display-6 text-warning"></i>' +
+          '<h3 class="h5 fw-bold text-white mt-3">Não foi possível carregar as oficinas</h3>' +
+          '<p class="mb-0">Verifique sua conexão e tente novamente.</p></div></div>';
+      });
+  }
+
+  /* ----------------------------------------------------------
+   * 8b. OFICINA - detalhe (primeira oficina do usuário)
+   * ---------------------------------------------------------- */
+  var oficinaNome = document.querySelector('[data-oficina-nome]');
+  var oficinaInfo = document.querySelector('[data-oficina-info]');
+  if (oficinaNome || oficinaInfo) {
+    fetch('backend/oficinas.php', { credentials: 'same-origin' })
+      .then(function (r) {
+        return r.json();
+      })
+      .then(function (oficinas) {
+        var o = Array.isArray(oficinas) && oficinas.length ? oficinas[0] : null;
+        if (!o) return;
+        if (oficinaNome) oficinaNome.textContent = o.nome;
+        if (oficinaInfo) {
+          var cep = String(o.cep || '').replace(/\D/g, '').slice(0, 8);
+          var cepTxt = cep.length === 8 ? cep.slice(0, 5) + '-' + cep.slice(5) : o.cep || '';
+          oficinaInfo.innerHTML =
+            '<i class="bi bi-geo-alt"></i> ' +
+            gyEsc(o.email || '') +
+            (cepTxt ? ' · CEP ' + gyEsc(cepTxt) : '');
+        }
+      })
+      .catch(function () { /* mantém o placeholder */ });
+  }
+
+  /* ----------------------------------------------------------
+   * 9. FUNCIONÁRIOS (tabela + filtros + ações)
+   * ---------------------------------------------------------- */
+  var employeeGrid = document.querySelector('[data-employee-grid]');
+  if (employeeGrid) {
+    /* Área administrativa só para gerentes. */
+    var adminOnly = document.querySelector('[data-admin-only]');
+    var cargoAtual = null;
+    fetch('backend/auth.php', { credentials: 'same-origin', cache: 'no-store' })
+      .then(function (r) {
+        return r.json();
+      })
+      .then(function (d) {
+        if (d.authenticated) {
+          cargoAtual = d.usuario && d.usuario.tipo;
+          if (adminOnly) {
+            adminOnly.classList.toggle('d-none', cargoAtual !== 'gerente');
+          }
+        }
+      })
+      .catch(function () { /* segue sem bloquear a listagem */ });
+
+    var todosFunc = [];
+    function renderFuncionarios(filtro, busca) {
+      var lista = todosFunc;
+      if (filtro && filtro !== 'todos') {
+        lista = lista.filter(function (f) { return f.cargo === filtro; });
+      }
+      if (busca) {
+        var q = String(busca).toLowerCase();
+        lista = lista.filter(function (f) {
+          return (
+            String(f.nome || '').toLowerCase().indexOf(q) !== -1 ||
+            String(f.email || '').toLowerCase().indexOf(q) !== -1 ||
+            String(f.funcao || '').toLowerCase().indexOf(q) !== -1
+          );
+        });
+      }
+      if (!lista.length) {
+        employeeGrid.innerHTML =
+          '<tr><td colspan="8" class="text-center text-secondary py-5">' +
+          '<i class="bi bi-people display-6 text-warning"></i>' +
+          '<h3 class="h5 fw-bold text-white mt-3">' +
+          (busca ? 'Nenhum funcionário encontrado para "' + gyEsc(busca) + '"' : 'Nenhum funcionário encontrado') +
+          '</h3>' +
+          (busca
+            ? ''
+            : '<p class="mb-0">Cadastre um funcionário para começar a montar sua equipe.</p>') +
+          '</td></tr>';
+        return;
+      }
+      employeeGrid.innerHTML = lista
+        .map(function (f) {
+          var rotulo = f.cargo === 'gerente' ? 'Gerente' : f.cargo === 'usuario' ? 'Usuário' : 'Funcionário';
+          return (
+            '<tr>' +
+            '<td><span class="d-inline-flex align-items-center justify-content-center p-2 fs-6" data-av></span></td>' +
+            '<td class="fw-semibold">' + gyEsc(f.nome) + '</td>' +
+            '<td>' + gyEsc(f.email) + '</td>' +
+            '<td>' + gyEsc(f.funcao || '—') + '</td>' +
+            '<td>' + formatarTelefone(f.telefone) + '</td>' +
+            '<td><span class="badge ' + (f.cargo === 'gerente' ? 'text-bg-warning' : 'text-bg-secondary') + '">' + rotulo + '</span></td>' +
+            '<td>' + formatarData(f.criado_em) + '</td>' +
+            '<td class="text-nowrap">' +
+            '<a class="btn btn-sm btn-outline-warning me-1" href="editar-funcionario.html?id=' + f.id + '"><i class="bi bi-pencil"></i> Editar</a>' +
+            '<button type="button" class="btn btn-sm btn-outline-danger" data-del-func="' + f.id + '" data-nome-func="' + gyEsc(f.nome) + '" aria-label="Excluir funcionário">' +
+            '<i class="bi bi-trash"></i></button>' +
+            '</td>' +
+            '</tr>'
+          );
+        })
+        .join('');
+      employeeGrid.querySelectorAll('[data-av]').forEach(function (el, i) {
+        montarAvatar(el, lista[i].nome, null);
+      });
+    }
+
+    function carregarFuncionarios() {
+      fetch('backend/funcionarios.php', { credentials: 'same-origin' })
+        .then(function (r) {
+          return r.json();
+        })
+        .then(function (lista) {
+          todosFunc = Array.isArray(lista) ? lista : [];
+          renderFuncionarios(abaAtiva(), buscaAtual());
+        })
+        .catch(function () {
+          employeeGrid.innerHTML =
+            '<tr><td colspan="8" class="text-center text-secondary py-5">' +
+            '<i class="bi bi-exclamation-triangle display-6 text-warning"></i>' +
+            '<h3 class="h5 fw-bold text-white mt-3">Não foi possível carregar os funcionários</h3>' +
+            '<p class="mb-0">Verifique sua conexão e tente novamente.</p></td></tr>';
+        });
+    }
+    carregarFuncionarios();
+
+    function abaAtiva() {
+      var ativo = document.querySelector('[data-tab-btn].is-active');
+      return ativo ? ativo.getAttribute('data-tab-btn') : 'todos';
+    }
+    function buscaAtual() {
+      var campo = document.querySelector('[data-search-func]');
+      return campo ? campo.value.trim() : '';
+    }
+
+    document.querySelectorAll('[data-tab-btn]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        renderFuncionarios(btn.getAttribute('data-tab-btn'), buscaAtual());
+      });
+    });
+
+    var buscaFunc = document.querySelector('[data-search-func]');
+    if (buscaFunc) {
+      buscaFunc.addEventListener('input', function () {
+        renderFuncionarios(abaAtiva(), buscaFunc.value.trim());
+      });
+    }
+
+    employeeGrid.addEventListener('click', function (e) {
+      var del = e.target.closest('[data-del-func]');
+      if (!del) return;
+      var id = del.getAttribute('data-del-func');
+      var nome = del.getAttribute('data-nome-func');
+      if (!window.confirm('Excluir o funcionário "' + nome + '"? Essa ação não pode ser desfeita.')) return;
+      del.disabled = true;
+      fetch('backend/excluir-funcionario.php', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'id=' + encodeURIComponent(id)
+      })
+        .then(function (r) {
+          return r.json();
+        })
+        .then(function (res) {
+          if (res && res.ok) {
+            carregarFuncionarios();
+          } else {
+            window.alert((res && res.erro) || 'Não foi possível excluir o funcionário.');
+            del.disabled = false;
+          }
+        })
+        .catch(function () {
+          window.alert('Não foi possível excluir o funcionário. Tente novamente.');
+          del.disabled = false;
+        });
+    });
+  }
+
+  /* ----------------------------------------------------------
+   * 10. EDITAR FUNCIONÁRIO
+   * ---------------------------------------------------------- */
+  var editForm = document.getElementById('edit-form');
+  if (editForm) {
+    var editAlert = document.getElementById('edit-alert');
+    var editId = new URLSearchParams(window.location.search).get('id');
+    function msgErro(texto) {
+      if (!editAlert) return;
+      editAlert.textContent = texto;
+      editAlert.className = 'alert alert-danger';
+    }
+    function msgOk(texto) {
+      if (!editAlert) return;
+      editAlert.textContent = texto;
+      editAlert.className = 'alert alert-success';
+    }
+
+    if (editId) {
+      fetch('backend/carregar-funcionario.php?id=' + encodeURIComponent(editId), {
+        credentials: 'same-origin'
+      })
+        .then(function (r) {
+          if (!r.ok) throw new Error('http');
+          return r.json();
+        })
+        .then(function (u) {
+          if (u.erro) {
+            msgErro('Não foi possível carregar este usuário.');
+            return;
+          }
+          document.getElementById('edit-nome').value = u.nome || '';
+          document.getElementById('edit-email').value = u.email || '';
+          document.getElementById('edit-data').value = u.data_nascimento || '';
+          document.getElementById('edit-funcao').value = u.funcao || '';
+          var editCargo = document.getElementById('edit-cargo');
+          if (editCargo && u.cargo) editCargo.value = u.cargo;
+          document.getElementById('edit-telefone').value = u.telefone ? formatarTelefone(u.telefone) : '';
+          document.getElementById('edit-endereco').value = u.endereco || '';
+          document.getElementById('edit-cep').value = u.cep || '';
+          document.getElementById('edit-cidade').value = u.cidade || '';
+          document.getElementById('edit-uf').value = u.uf || '';
+        })
+        .catch(function () {
+          msgErro('Não foi possível carregar este usuário. Verifique sua conexão.');
+        });
+    } else {
+      msgErro('Nenhum usuário informado para edição.');
+    }
+
+    editForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var dados = new FormData(editForm);
+      dados.append('id', editId || '0');
+      var btn = editForm.querySelector('[type="submit"]');
+      var textoOriginal = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Salvando...';
+      fetch('backend/editar-funcionario.php', {
+        method: 'POST',
+        credentials: 'same-origin',
+        body: dados
+      })
+        .then(function (r) {
+          return r.json();
+        })
+        .then(function (res) {
+          if (res && res.ok) {
+            msgOk('Alterações salvas com sucesso.');
+            btn.innerHTML = '<i class="bi bi-check-lg"></i> Salvo';
+          } else {
+            msgErro((res && res.erro) || 'Não foi possível salvar as alterações. Tente novamente.');
+            btn.disabled = false;
+            btn.innerHTML = textoOriginal;
+          }
+        })
+        .catch(function () {
+          msgErro('Não foi possível salvar as alterações. Tente novamente.');
+          btn.disabled = false;
+          btn.innerHTML = textoOriginal;
+        });
+    });
+  }
+
+  /* ----------------------------------------------------------
+   * 11. SERVIÇOS (OS) - seletor + detalhes + problemas
+   * ---------------------------------------------------------- */
+  var svcSelect = document.querySelector('[data-select-os]');
+  var svcContent = document.querySelector('[data-svc-content]');
+  var svcEmpty = document.querySelector('[data-service-empty]');
+  var problemaLista = document.querySelector('[data-problem-list]');
+  var svcLista = [];
+  var svcAtual = null;
+
+  var ROTULO_STATUS = {
+    em_andamento: 'Em andamento',
+    aguardando: 'Aguardando',
+    concluido: 'Concluído',
+    cancelado: 'Cancelado'
+  };
+
+  function setContentView(temServico) {
+    if (svcContent) svcContent.classList.toggle('d-none', !temServico);
+    if (svcEmpty) svcEmpty.classList.toggle('d-none', temServico);
+    var probs = document.querySelector('[data-svc-problems]');
+    if (probs) probs.classList.toggle('d-none', !temServico);
+  }
+
+  function preencherSelect() {
+    if (!svcSelect) return;
+    fetch('backend/servicos.php', { credentials: 'same-origin' })
+      .then(function (r) {
+        return r.json();
+      })
+      .then(function (lista) {
+        svcLista = Array.isArray(lista) ? lista : [];
+        if (!svcLista.length) {
+          if (svcSelect) svcSelect.innerHTML = '<option value="">Nenhuma OS cadastrada</option>';
+          setContentView(false);
+          return;
+        }
+        svcSelect.innerHTML =
+          '<option value="">Selecione um serviço...</option>' +
+          svcLista
+            .map(function (s) {
+              return '<option value="' + s.id + '">OS #' + s.id + ' - ' + gyEsc(s.titulo) + '</option>';
+            })
+            .join('');
+        setContentView(true);
+        var qs = new URLSearchParams(window.location.search);
+        var alvoId = parseInt(qs.get('id'), 10);
+        var alvo = svcLista.find(function (s) {
+          return s.id === alvoId;
+        });
+        if (!alvo) alvo = svcLista[0];
+        exibirServico(alvo);
+        svcSelect.value = String(alvo.id);
+      })
+      .catch(function () {
+        if (svcSelect) svcSelect.innerHTML = '<option value="">Não foi possível carregar os serviços</option>';
+        setContentView(false);
+      });
+  }
+
+  function exibirServico(s) {
+    svcAtual = s;
+    function preencher(sel, valor, padrao) {
+      var el = document.querySelector(sel);
+      if (el) el.textContent = valor || padrao || '—';
+    }
+    preencher('[data-svc-num]', s.id);
+    preencher('[data-svc-inicio]', formatarData(s.criado_em));
+    preencher('[data-svc-cliente]', s.cliente);
+    preencher('[data-svc-cliente-tel]', formatarTelefone(s.cliente_telefone));
+    preencher('[data-svc-cliente-email]', s.cliente_email);
+
+    var avatarCliente = document.querySelector('[data-svc-cliente-avatar]');
+    if (avatarCliente) {
+      montarAvatar(avatarCliente, s.cliente, gyFotoCliente(s.cliente));
+    }
+    preencher('[data-svc-veiculo]', s.veiculo);
+    preencher('[data-svc-placa]', s.placa);
+    preencher('[data-svc-ano]', s.ano);
+
+    var imgVeiculo = document.querySelector('[data-svc-veiculo-img]');
+    if (imgVeiculo) {
+      imgVeiculo.removeAttribute('src');
+      imgVeiculo.hidden = true;
+      gyVeiculoFoto(s.veiculo, function (url) {
+        if (url && document.body.contains(imgVeiculo)) {
+          imgVeiculo.src = url;
+          imgVeiculo.hidden = false;
+        }
+      });
+    }
+    preencher('[data-svc-servico]', s.servico);
+    preencher('[data-svc-func]', s.funcionario ? s.funcionario.nome : '—');
+
+    var titulo = document.querySelector('[data-service-title]');
+    if (titulo) titulo.textContent = s.titulo || 'Serviço sem título';
+    var statusEl = document.querySelector('[data-service-status]');
+    if (statusEl) {
+      statusEl.textContent = ROTULO_STATUS[s.status] || s.status || 'Em andamento';
+      var corStatus =
+        s.status === 'concluido' ? 'text-bg-success'
+        : s.status === 'cancelado' ? 'text-bg-danger'
+        : s.status === 'aguardando' ? 'text-bg-secondary'
+        : 'text-bg-warning';
+      statusEl.className = 'badge fs-6 ' + corStatus;
+    }
+
+    renderizarProblemas(s.problemas || []);
+  }
+
+  function renderizarProblemas(problemas) {
+    if (!problemaLista) return;
+    if (!problemas.length) {
+      problemaLista.innerHTML =
+        '<li class="list-group-item text-secondary">Nenhum problema identificado até o momento.</li>';
+      return;
+    }
+    problemaLista.innerHTML = problemas
+      .map(function (p, i) {
+        var rotuloStatus = p.status === 'resolvido' ? 'Resolvido' : p.status === 'aguardando' ? 'Aguardando' : 'Em análise';
+        return (
+          '<li class="list-group-item" data-problema-id="' + p.id + '">' +
+          '<div class="d-flex align-items-center gap-2 flex-wrap">' +
+          '<span class="badge text-bg-dark">' + (i + 1) + '</span>' +
+          '<strong class="me-auto">' + gyEsc(p.titulo) + '</strong>' +
+          '<span class="badge ' + (p.status === 'resolvido' ? 'text-bg-success' : p.status === 'aguardando' ? 'text-bg-secondary' : 'text-bg-warning') + '">' + rotuloStatus + '</span>' +
+          '</div>' +
+          (p.descricao ? '<p class="mt-1 mb-2 text-secondary">' + gyEsc(p.descricao) + '</p>' : '') +
+          '<div class="d-flex gap-2 flex-wrap">' +
+          (p.status === 'resolvido'
+            ? '<button type="button" class="btn btn-sm btn-outline-secondary" data-status-problema="em_analise">Reabrir</button>'
+            : '<button type="button" class="btn btn-sm btn-success" data-status-problema="resolvido">Marcar como resolvido</button>') +
+          '<button type="button" class="btn btn-sm btn-outline-warning" data-edit-problema="' + p.id + '" aria-label="Editar problema"><i class="bi bi-pencil"></i></button>' +
+          '<button type="button" class="btn btn-sm btn-outline-danger" data-del-problema="' + p.id + '" aria-label="Excluir problema"><i class="bi bi-trash"></i></button>' +
+          '</div>' +
+          '</li>'
+        );
+      })
+      .join('');
+  }
+
+  if (svcSelect) {
+    preencherSelect();
+    svcSelect.addEventListener('change', function () {
+      var id = parseInt(svcSelect.value, 10);
+      var encontrado = svcLista.find(function (s) {
+        return s.id === id;
+      });
+      if (encontrado) exibirServico(encontrado);
+    });
+  }
+
+  /* Formulário de novo problema (também usado para editar). */
+  var problemForm = document.querySelector('[data-problem-form]');
+  var addProblemBtn = document.querySelector('[data-add-problem]');
+  var cancelProblemBtn = document.querySelector('[data-cancel-problem]');
+  var problemEditId = document.querySelector('[data-problem-edit-id]');
+  var problemStatus = document.querySelector('[data-problem-status]');
+  var problemSubmitLabel = document.querySelector('[data-problem-submit-label]');
+
+  function entrarModoAdicionar() {
+    if (problemForm) problemForm.classList.add('d-none');
+    if (addProblemBtn) addProblemBtn.classList.remove('d-none');
+    if (problemEditId) problemEditId.value = '';
+    if (problemStatus) problemStatus.value = 'em_analise';
+    if (problemSubmitLabel) problemSubmitLabel.textContent = 'Adicionar';
+    if (problemForm) {
+      var submitBtn = problemForm.querySelector('[type="submit"]');
+      if (submitBtn) submitBtn.disabled = false;
+    }
+  }
+
+  function entrarModoEdicao(p) {
+    if (problemForm) problemForm.classList.remove('d-none');
+    if (addProblemBtn) addProblemBtn.classList.add('d-none');
+    if (problemEditId) problemEditId.value = p.id;
+    if (problemStatus) problemStatus.value = p.status || 'em_analise';
+    if (problemSubmitLabel) problemSubmitLabel.textContent = 'Salvar alterações';
+    var titulo = problemForm.querySelector('[name="titulo"]');
+    var descricao = problemForm.querySelector('[name="descricao"]');
+    if (titulo) titulo.value = p.titulo || '';
+    if (descricao) descricao.value = p.descricao || '';
+    var submitBtn = problemForm.querySelector('[type="submit"]');
+    if (submitBtn) submitBtn.disabled = false;
+  }
+
+  if (addProblemBtn && problemForm) {
+    addProblemBtn.addEventListener('click', function () {
+      problemForm.classList.remove('d-none');
+      addProblemBtn.classList.add('d-none');
+      if (problemEditId) problemEditId.value = '';
+      if (problemSubmitLabel) problemSubmitLabel.textContent = 'Adicionar';
+      problemForm.querySelector('[name="titulo"]').value = '';
+      problemForm.querySelector('[name="descricao"]').value = '';
+      if (problemStatus) problemStatus.value = 'em_analise';
+    });
+    if (cancelProblemBtn) {
+      cancelProblemBtn.addEventListener('click', function () {
+        entrarModoAdicionar();
+      });
+    }
+    problemForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!svcAtual) return;
+      var titulo = problemForm.querySelector('[name="titulo"]');
+      var descricao = problemForm.querySelector('[name="descricao"]');
+      var btn = problemForm.querySelector('[type="submit"]');
+      var texto = problemSubmitLabel ? problemSubmitLabel.textContent : 'Adicionar';
+      var editando = problemEditId && problemEditId.value !== '';
+      var corpo = editando
+        ? {
+            id: parseInt(problemEditId.value, 10),
+            titulo: titulo.value,
+            descricao: descricao.value,
+            status: problemStatus ? problemStatus.value : ''
+          }
+        : {
+            servico_id: svcAtual.id,
+            titulo: titulo.value,
+            descricao: descricao.value
+          };
+      btn.disabled = true;
+      if (problemSubmitLabel) problemSubmitLabel.textContent = editando ? 'Salvando...' : 'Adicionando...';
+      fetch(editando ? 'backend/editar-problema.php' : 'backend/adicionar-problema.php', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(corpo)
+      })
+        .then(function (r) {
+          return r.json();
+        })
+        .then(function (res) {
+          if (res && res.ok) {
+            entrarModoAdicionar();
+            preencherSelect();
+          } else {
+            window.alert((res && res.erro === 'campos_obrigatorios')
+              ? 'Informe o título do problema.'
+              : 'Não foi possível salvar o problema. Tente novamente.');
+            btn.disabled = false;
+            if (problemSubmitLabel) problemSubmitLabel.textContent = texto;
+          }
+        })
+        .catch(function () {
+          window.alert('Não foi possível salvar o problema. Tente novamente.');
+          btn.disabled = false;
+          if (problemSubmitLabel) problemSubmitLabel.textContent = texto;
+        });
+    });
+  }
+
+  /* Ações dentro da lista de problemas. */
+  if (problemaLista) {
+    problemaLista.addEventListener('click', function (e) {
+      var delBtn = e.target.closest('[data-del-problema]');
+      if (delBtn) {
+        var pid = delBtn.getAttribute('data-del-problema');
+        if (!svcAtual) return;
+        if (!window.confirm('Excluir este problema?')) return;
+        delBtn.disabled = true;
+        fetch('backend/excluir-problema.php', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ servico_id: svcAtual.id, id: parseInt(pid, 10) })
+        })
+          .then(function (r) {
+            return r.json();
+          })
+          .then(function (res) {
+            if (res && res.ok) {
+              preencherSelect();
+            } else {
+              window.alert('Não foi possível excluir o problema.');
+              delBtn.disabled = false;
+            }
+          })
+          .catch(function () {
+            window.alert('Não foi possível excluir o problema. Tente novamente.');
+            delBtn.disabled = false;
+          });
+        return;
+      }
+      var editBtn = e.target.closest('[data-edit-problema]');
+      if (editBtn) {
+        var epid = parseInt(editBtn.getAttribute('data-edit-problema'), 10);
+        var pAtual = (svcAtual.problemas || []).find(function (p) {
+          return p.id === epid;
+        });
+        if (pAtual) entrarModoEdicao(pAtual);
+        return;
+      }
+      var statusBtn = e.target.closest('[data-status-problema]');
+      if (statusBtn) {
+        var spid = statusBtn.closest('[data-problema-id]');
+        if (!spid) return;
+        statusBtn.disabled = true;
+        fetch('backend/atualizar-status.php', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: parseInt(spid.getAttribute('data-problema-id'), 10), status: statusBtn.getAttribute('data-status-problema') })
+        })
+          .then(function (r) {
+            return r.json();
+          })
+          .then(function (res) {
+            if (res && res.ok) {
+              preencherSelect();
+            } else {
+              window.alert('Não foi possível atualizar o status.');
+              statusBtn.disabled = false;
+            }
+          })
+          .catch(function () {
+            window.alert('Não foi possível atualizar o status. Tente novamente.');
+            statusBtn.disabled = false;
+          });
+      }
+    });
+  }
+
+  /* ----------------------------------------------------------
+   * 12. NOVA OS - responsável + autocomplete de veículo
+   * ---------------------------------------------------------- */
+  var funcSelect = document.getElementById('funcionario_id');
+  if (funcSelect) {
+    fetch('backend/funcionarios.php', { credentials: 'same-origin' })
+      .then(function (r) {
+        return r.json();
+      })
+      .then(function (lista) {
+        if (!Array.isArray(lista)) return;
+        var opcoes = lista
+          .filter(function (f) {
+            return f.cargo === 'funcionario' || f.cargo === 'gerente';
+          })
+          .map(function (f) {
+            return '<option value="' + f.id + '">' + gyEsc(f.nome) + (f.funcao ? ' - ' + gyEsc(f.funcao) : '') + '</option>';
+          })
+          .join('');
+        funcSelect.innerHTML = '<option value="0">— Sem responsável —</option>' + opcoes;
+      })
+      .catch(function () { /* deixa apenas a opção padrão */ });
+  }
+
+  /* ----------------------------------------------------------
+   * 12b. NOVA OS - seleção de veículo via API FIPE
+   *      (marca → modelo → ano → dados FIPE + foto)
+   * ---------------------------------------------------------- */
+  var vMarca = document.querySelector('[data-fipe-marca]');
+  if (vMarca) {
+    var vModelo = document.querySelector('[data-fipe-modelo]');
+    var vAno = document.querySelector('[data-fipe-ano]');
+    var vModeloLista = document.getElementById('fipe-modelos-list');
+    var vResumo = document.querySelector('[data-veiculo-resumo]');
+    var vMarcaId = document.querySelector('[data-veiculo-marca-id]');
+    var vModeloId = document.querySelector('[data-veiculo-modelo-id]');
+    var vAnoId = document.querySelector('[data-veiculo-ano-id]');
+    var vAnoNum = document.querySelector('[data-veiculo-ano-num]');
+    var vPainel = document.querySelector('[data-veiculo-painel]');
+    var vImg = document.querySelector('[data-veiculo-img]');
+    var vLoadingImg = document.querySelector('[data-veiculo-loading]');
+    var vNome = document.querySelector('[data-veiculo-nome]');
+    var vPreco = document.querySelector('[data-veiculo-preco]');
+    var vFipe = document.querySelector('[data-veiculo-fipe]');
+    var vRef = document.querySelector('[data-veiculo-ref]');
+
+    var modeloSelecionado = null;
+    var modelosMarca = [];
+
+    function setPainel(mostrar) {
+      if (vPainel) vPainel.classList.toggle('d-none', !mostrar);
+    }
+    function setFotoLoading(ativo) {
+      if (!vLoadingImg) return;
+      if (!ativo) vLoadingImg.hidden = true;
+    }
+    function mostrarFoto(url) {
+      if (!vImg || !vLoadingImg) return;
+      vLoadingImg.hidden = true;
+      if (!url) {
+        vImg.removeAttribute('src');
+        return;
+      }
+      vImg.src = url;
+    }
+    function limparVeiculo() {
+      if (vResumo) vResumo.value = '';
+      if (vMarcaId) vMarcaId.value = '';
+      if (vModeloId) vModeloId.value = '';
+      if (vAnoId) vAnoId.value = '';
+      if (vAnoNum) vAnoNum.value = '';
+      if (vNome) vNome.textContent = '—';
+      if (vPreco) vPreco.textContent = '—';
+      if (vFipe) vFipe.textContent = '—';
+      if (vRef) vRef.textContent = '—';
+      setPainel(false);
+      if (vImg) vImg.removeAttribute('src');
+      modeloSelecionado = null;
+    }
+
+    /* Marcas (uma vez por página; backend cacheia por 7 dias). */
+    fetch('backend/fipe.php?recurso=marcas', { credentials: 'same-origin' })
+      .then(function (r) { return r.json(); })
+      .then(function (marcas) {
+        if (!Array.isArray(marcas)) return;
+        vMarca.innerHTML =
+          '<option value="">Selecione a marca…</option>' +
+          marcas.map(function (m) {
+            return '<option value="' + m.id + '">' + gyEsc(m.nome) + '</option>';
+          }).join('');
+        vMarca.disabled = false;
+      })
+      .catch(function () {
+        vMarca.innerHTML = '<option value="">Não foi possível carregar as marcas.</option>';
+      });
+
+    vMarca.addEventListener('change', function () {
+      var id = parseInt(vMarca.value, 10);
+      limparVeiculo();
+      modelosMarca = [];
+      vAno.innerHTML = '<option value="">Selecione o modelo primeiro…</option>';
+      vAno.disabled = true;
+      vModeloLista.innerHTML = '';
+      vModelo.value = '';
+      vModelo.disabled = true;
+      if (!id) return;
+      vModelo.disabled = true;
+      vModelo.placeholder = 'Carregando modelos…';
+      var requicao = id;
+      fetch('backend/fipe.php?recurso=modelos&marca=' + id, { credentials: 'same-origin' })
+        .then(function (r) { return r.json(); })
+        .then(function (modelos) {
+          if (parseInt(vMarca.value, 10) !== requicao) return; // resposta antiga
+          if (!Array.isArray(modelos) || !modelos.length) {
+            vModelo.placeholder = 'Nenhum modelo encontrado.';
+            return;
+          }
+          modelosMarca = modelos;
+          vModeloLista.innerHTML = modelos
+            .map(function (m) { return '<option value="' + gyEsc(m.nome) + '"></option>'; })
+            .join('');
+          vModelo.disabled = false;
+          vModelo.placeholder = 'Digite para pesquisar o modelo…';
+        })
+        .catch(function () {
+          if (parseInt(vMarca.value, 10) !== requicao) return;
+          vModelo.placeholder = 'Erro ao carregar modelos.';
+        });
+    });
+
+    /* Modelo: confere contra a lista carregada e então busca os anos. */
+    vModelo.addEventListener('change', function () {
+      var nome = String(vModelo.value || '').trim();
+      var encontrado = modelosMarca.find(function (m) { return m.nome === nome; });
+      if (!encontrado) {
+        limparVeiculo();
+        vAno.innerHTML = '<option value="">Escolha um modelo válido da lista…</option>';
+        vAno.disabled = true;
+        vModelo.setCustomValidity('Escolha um modelo da lista sugerida.');
+        return;
+      }
+      vModelo.setCustomValidity('');
+      var marcaId = parseInt(vMarca.value, 10);
+      limparVeiculo();
+      var requisicao = { marca: marcaId, modelo: nome };
+      vAno.innerHTML = '<option value="">Carregando anos…</option>';
+      vAno.disabled = true;
+      fetch('backend/fipe.php?recurso=anos&marca=' + marcaId + '&modelo=' + encontrado.id, { credentials: 'same-origin' })
+        .then(function (r) { return r.json(); })
+        .then(function (anos) {
+          if (String(vModelo.value || '').trim() !== requisicao.modelo) return;
+          if (!Array.isArray(anos) || !anos.length) {
+            vAno.innerHTML = '<option value="">Nenhum ano disponível.</option>';
+            return;
+          }
+          vAno.innerHTML = '<option value="">Selecione o ano…</option>' + anos
+            .map(function (a) { return '<option value="' + gyEsc(a.id) + '">' + gyEsc(a.nome) + '</option>'; })
+            .join('');
+          vAno.disabled = false;
+        })
+        .catch(function () {
+          if (String(vModelo.value || '').trim() !== requisicao.modelo) return;
+          vAno.innerHTML = '<option value="">Erro ao carregar anos.</option>';
+        });
+    });
+
+    vAno.addEventListener('change', function () {
+      if (!vAno.value) {
+        limparVeiculo();
+        return;
+      }
+      var marcaId = parseInt(vMarca.value, 10);
+      var nomeModelo = String(vModelo.value || '').trim();
+      var modeloAtual = modelosMarca.find(function (m) { return m.nome === nomeModelo; });
+      if (marcaId <= 0 || !modeloAtual) return;
+      var anoId = vAno.value;
+      setPainel(true);
+      vNome.textContent = 'Buscando dados do veíiculo…';
+      vPreco.textContent = '—';
+      vFipe.textContent = '—';
+      vRef.textContent = '—';
+      vLoadingImg.hidden = false;
+      if (vImg) vImg.removeAttribute('src');
+      var requisicao = marcaId + '_' + modeloAtual.id + '_' + anoId;
+      fetch('backend/fipe.php?recurso=veiculo&marca=' + marcaId + '&modelo=' + modeloAtual.id + '&ano=' + encodeURIComponent(anoId), { credentials: 'same-origin' })
+        .then(function (r) { return r.json(); })
+        .then(function (v) {
+          if (marcaId + '_' + modeloAtual.id + '_' + anoId !== requisicao) return;
+          if (!v || v.erro) {
+            vNome.textContent = 'Não foi possível buscar o veículo.';
+            vLoadingImg.hidden = true;
+            return;
+          }
+          if (vResumo) vResumo.value = v.marca + ' ' + v.modelo + ' ' + v.ano;
+          if (vMarcaId) vMarcaId.value = marcaId;
+          if (vModeloId) vModeloId.value = modeloAtual.id;
+          if (vAnoId) vAnoId.value = anoId;
+          if (vAnoNum) vAnoNum.value = v.ano || '';
+          vNome.textContent = v.marca + ' ' + v.modelo + ' ' + (v.ano || '');
+          vPreco.textContent = v.preco || '—';
+          vFipe.textContent = v.codigo_fipe ? 'Código: ' + v.codigo_fipe : '—';
+          vRef.textContent = v.referencia ? 'Referência: ' + v.referencia : '—';
+          setPainel(true);
+          gyVeiculoFoto(v.marca + ' ' + v.modelo + ' ' + v.ano, mostrarFoto);
+        })
+        .catch(function () {
+          if (marcaId + '_' + modeloAtual.id + '_' + anoId !== requisicao) return;
+          vNome.textContent = 'Não foi possível buscar o veículo. Tente novamente.';
+          vLoadingImg.hidden = true;
+        });
+    });
+  }
+
+  /* ----------------------------------------------------------
+   * 13. PERFIL - carregar + salvar (nome e foto)
+   * ---------------------------------------------------------- */
+  var profileForm = document.getElementById('profile-form');
+  if (profileForm) {
+    var profileAlert = document.getElementById('profile-alert');
+    var avatarImg = document.getElementById('profile-avatar-img');
+    var avatarInitial = document.getElementById('profile-avatar-initial');
+    var avatarEditBtn = document.getElementById('profile-avatar-edit');
+    var fileInput = document.getElementById('foto');
+
+    function msgP(ok, texto) {
+      if (!profileAlert) return;
+      profileAlert.textContent = texto;
+      profileAlert.className = ok ? 'alert alert-success' : 'alert alert-danger';
+    }
+
+    fetch('backend/perfil.php', { credentials: 'same-origin' })
+      .then(function (r) {
+        if (!r.ok) throw new Error('http');
+        return r.json();
+      })
+      .then(function (u) {
+        if (u.erro) return;
+        document.getElementById('nome').value = u.nome || '';
+        document.getElementById('email').value = u.email || '';
+        if (u.foto) {
+          avatarImg.src = u.foto;
+          avatarImg.hidden = false;
+          avatarInitial.classList.add('d-none');
+        } else {
+          avatarInitial.textContent = iniciais(u.nome);
+          avatarInitial.classList.remove('d-none');
+        }
+        var titulo = document.getElementById('profile-title');
+        if (titulo) titulo.textContent = u.nome || 'Meu perfil';
+        var cargoEl = document.getElementById('profile-cargo');
+        if (cargoEl) {
+          cargoEl.textContent =
+            u.cargo === 'gerente' ? 'Gerente' : u.cargo === 'funcionario' ? 'Funcionário' : 'Usuário';
+        }
+        var emailInfo = document.getElementById('profile-email-info');
+        if (emailInfo) emailInfo.textContent = u.email || '';
+        var membroEl = document.getElementById('profile-membro');
+        if (membroEl) membroEl.textContent = formatarData(u.criado_em);
+      })
+      .catch(function () {
+        msgP(false, 'Não foi possível carregar seu perfil.');
+      });
+
+    if (avatarEditBtn && fileInput) {
+      avatarEditBtn.addEventListener('click', function () {
+        fileInput.click();
+      });
+      fileInput.addEventListener('change', function () {
+        var arquivo = fileInput.files && fileInput.files[0];
+        if (!arquivo) return;
+        if (arquivo.size > 2 * 1024 * 1024) {
+          msgP(false, 'Imagem muito grande (máx. 2 MB).');
+          return;
+        }
+        var leitor = new FileReader();
+        leitor.onload = function () {
+          avatarImg.src = leitor.result;
+          avatarImg.hidden = false;
+          avatarInitial.classList.add('d-none');
+        };
+        leitor.readAsDataURL(arquivo);
+      });
+    }
+
+    profileForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var dados = new FormData(profileForm);
+      var btn = profileForm.querySelector('[type="submit"]');
+      var texto = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Salvando...';
+      fetch('backend/perfil.php', {
+        method: 'POST',
+        credentials: 'same-origin',
+        body: dados
+      })
+        .then(function (r) {
+          return r.json();
+        })
+        .then(function (res) {
+          if (res && res.ok) {
+            msgP(true, 'Alterações salvas com sucesso.');
+            if (res.usuario && res.usuario.foto) {
+              avatarImg.src = res.usuario.foto;
+              avatarImg.hidden = false;
+              avatarInitial.classList.add('d-none');
+            }
+            if (res.usuario && res.usuario.nome) {
+              var tituloP = document.getElementById('profile-title');
+              if (tituloP) tituloP.textContent = res.usuario.nome;
+            }
+            btn.innerHTML = '<i class="bi bi-check-lg"></i> Salvo';
+          } else {
+            msgP(false, (res && res.erro) || 'Não foi possível salvar as alterações. Tente novamente.');
+            btn.disabled = false;
+            btn.innerHTML = texto;
+          }
+        })
+        .catch(function () {
+          msgP(false, 'Não foi possível salvar as alterações. Tente novamente.');
+          btn.disabled = false;
+          btn.innerHTML = texto;
+        });
+    });
+  }
+
+  var senhaForm = document.getElementById('senha-form');
+  if (senhaForm) {
+    var senhaAlert = document.getElementById('senha-alert');
+    function msgSenha(ok, texto) {
+      if (!senhaAlert) return;
+      senhaAlert.textContent = texto;
+      senhaAlert.className = ok ? 'alert alert-success' : 'alert alert-danger';
+    }
+    senhaForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var dados = new FormData(senhaForm);
+      dados.append('action', 'trocar_senha');
+      var btn = senhaForm.querySelector('[type="submit"]');
+      var texto = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Salvando...';
+      fetch('backend/perfil.php', {
+        method: 'POST',
+        credentials: 'same-origin',
+        body: dados
+      })
+        .then(function (r) {
+          return r.json();
+        })
+        .then(function (res) {
+          if (res && res.ok) {
+            msgSenha(true, 'Senha atualizada com sucesso.');
+            senhaForm.reset();
+          } else {
+            msgSenha(false, (res && res.erro) || 'Não foi possível alterar a senha.');
+          }
+          btn.disabled = false;
+          btn.innerHTML = texto;
+        })
+        .catch(function () {
+          msgSenha(false, 'Não foi possível alterar a senha. Tente novamente.');
+          btn.disabled = false;
+          btn.innerHTML = texto;
+        });
+    });
+  }
+
+  /* ----------------------------------------------------------
+   * 14. HOME - stats + ações rápidas + serviços recentes
+   * ---------------------------------------------------------- */
+  var statOficinas = document.querySelector('[data-stat-oficinas]');
+  var statUsuarios = document.querySelector('[data-stat-usuarios]');
+  var statMinhas = document.querySelector('[data-stat-minhas]');
+  var homeDash = document.querySelector('[data-home-dash]');
+  var recentOs = document.querySelector('[data-recent-os]');
+
+  fetch('backend/stats.php', { credentials: 'same-origin' })
+    .then(function (r) {
+      return r.json();
+    })
+    .then(function (d) {
+      if (statOficinas) statOficinas.textContent = d.total_oficinas;
+      if (statUsuarios) statUsuarios.textContent = d.total_usuarios;
+      if (statMinhas) statMinhas.textContent = d.minhas_oficinas;
+    })
+    .catch(function () { /* mantém os placeholders */ });
+
+  if (homeDash && recentOs) {
+    fetch('backend/servicos.php', { credentials: 'same-origin' })
+      .then(function (r) {
+        if (!r.ok) throw new Error('nao_autenticado');
+        return r.json();
+      })
+      .then(function (lista) {
+        homeDash.hidden = false;
+        var OS = Array.isArray(lista) ? lista.slice(0, 3) : [];
+        if (!OS.length) {
+          recentOs.innerHTML =
+            '<li class="list-group-item text-secondary">Nenhuma ordem de serviço ainda.' +
+            ' <a href="adicionar-servico.html">Crie a primeira</a>.</li>';
+          return;
+        }
+        recentOs.innerHTML = OS.map(function (s) {
+          var rotulo = ROTULO_STATUS[s.status] || s.status || 'Em andamento';
+          return (
+            '<li class="list-group-item d-flex align-items-center justify-content-between gap-3">' +
+            '<div>' +
+            '<strong class="d-block">' + gyEsc(s.titulo || 'Serviço sem título') + '</strong>' +
+            '<small class="text-secondary">' + (s.veiculo ? gyEsc(s.veiculo) : 'Veículo não informado') + ' · OS #' + s.id + '</small>' +
+            '</div>' +
+            '<span class="badge ' + (s.status === 'concluido' ? 'text-bg-success' : s.status === 'cancelado' ? 'text-bg-danger' : s.status === 'aguardando' ? 'text-bg-secondary' : 'text-bg-warning') + '">' + rotulo + '</span>' +
+            '</li>'
+          );
+        }).join('');
+      })
+      .catch(function () { /* usuário não logado: dashboard permanece oculto */ });
+  }
+
+  /* ----------------------------------------------------------
+   * 15. SERVIÇOS - lista de OS (adicionar/abrir/remover)
+   * ---------------------------------------------------------- */
+  var svcListaEl = document.querySelector('[data-svc-list]');
+  if (svcListaEl) {
+    function renderizarListaServicos(lista) {
+      if (!lista.length) {
+        svcListaEl.innerHTML =
+          '<li class="list-group-item text-center text-secondary py-5">Nenhuma ordem de serviço ainda.' +
+          ' <a href="adicionar-servico.html">Crie a primeira</a>.</li>';
+        return;
+      }
+      svcListaEl.innerHTML = lista
+        .map(function (s) {
+          var rotulo = ROTULO_STATUS[s.status] || s.status || 'Em andamento';
+          return (
+            '<li class="list-group-item d-flex align-items-center gap-3 flex-wrap" data-svc-item="' + s.id + '">' +
+            '<a class="d-flex align-items-center gap-3 flex-grow-1 text-decoration-none text-white" href="servicos.html?id=' + s.id + '">' +
+            '<span class="badge text-bg-dark">OS ' + s.id + '</span>' +
+            '<span class="flex-grow-1">' +
+            '<strong class="d-block">' + gyEsc(s.titulo || 'Serviço sem título') + '</strong>' +
+            '<small class="text-secondary">' +
+            (s.veiculo ? gyEsc(s.veiculo) : 'Veículo não informado') +
+            (s.cliente ? ' · ' + gyEsc(s.cliente) : '') +
+            ' · ' + formatarData(s.criado_em) +
+            '</small>' +
+            '</span>' +
+            '<span class="badge ' + (s.status === 'concluido' ? 'text-bg-success' : s.status === 'cancelado' ? 'text-bg-danger' : s.status === 'aguardando' ? 'text-bg-secondary' : 'text-bg-warning') + '">' + rotulo + '</span>' +
+            '<i class="bi bi-chevron-right text-secondary" aria-hidden="true"></i>' +
+            '</a>' +
+            '<button type="button" class="btn btn-sm btn-outline-danger" data-del-servico="' + s.id + '" aria-label="Remover serviço"><i class="bi bi-trash"></i></button>' +
+            '</li>'
+          );
+        })
+        .join('');
+    }
+
+    function carregarListaServicos() {
+      svcListaEl.innerHTML = '<li class="list-group-item text-secondary">Carregando…</li>';
+      fetch('backend/servicos.php', { credentials: 'same-origin' })
+        .then(function (r) {
+          return r.json();
+        })
+        .then(function (lista) {
+          renderizarListaServicos(Array.isArray(lista) ? lista : []);
+        })
+        .catch(function () {
+          svcListaEl.innerHTML = '<li class="list-group-item text-secondary">Não foi possível carregar os serviços.</li>';
+        });
+    }
+
+    carregarListaServicos();
+
+    svcListaEl.addEventListener('click', function (e) {
+      var delBtn = e.target.closest('[data-del-servico]');
+      if (!delBtn) return;
+      var id = parseInt(delBtn.getAttribute('data-del-servico'), 10);
+      var item = document.querySelector('[data-svc-item="' + id + '"]');
+      var nome = item ? item.querySelector('strong').textContent : 'este serviço';
+      if (!window.confirm('Remover "' + nome + '"? Esta ação não pode ser desfeita.')) return;
+      delBtn.disabled = true;
+      fetch('backend/excluir-servico.php', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: id })
+      })
+        .then(function (r) {
+          return r.json();
+        })
+        .then(function (res) {
+          if (res && res.ok) {
+            carregarListaServicos();
+          } else {
+            window.alert('Não foi possível remover o serviço.');
+            delBtn.disabled = false;
+          }
+        })
+        .catch(function () {
+          window.alert('Não foi possível remover o serviço. Tente novamente.');
+          delBtn.disabled = false;
+        });
+    });
+  }
+})();
+
+
+</script>
+  </body>
+</html>

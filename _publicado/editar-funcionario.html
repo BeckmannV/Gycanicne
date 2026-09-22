@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Gycanic | Editar usuário</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-protected-page>
+    <button type="button" class="gy-mobile-menu-btn" data-mobile-menu-btn aria-label="Abrir menu"><i class="fa fa-bars"></i></button>
+    <div class="wrapper">
+      <aside class="main-sidebar">
+        <section class="sidebar">
+          <div class="gy-logo">
+            <button
+              class="gy-sidebar-toggle"
+              type="button"
+              aria-label="Abrir menu"
+              data-sidebar-toggle
+            >
+              <span></span></button
+            ><a href="index.html" class="gy-brand"
+              ><span class="gy-accent">Gy</span>canic</a
+            >
+          </div>
+          <ul class="sidebar-menu">
+            <li>
+              <a href="index.html"
+                ><i class="fa fa-home"></i><span>Início</span></a
+              >
+            </li>
+            <li>
+              <a href="oficinas.html"
+                ><i class="fa fa-wrench"></i><span>Oficinas</span></a
+              >
+            </li>
+            <li class="active">
+              <a href="funcionarios.html"
+                ><i class="fa fa-users"></i><span>Funcionários</span></a
+              >
+            </li>
+            <li>
+              <a href="perfil.html"
+                ><i class="fa fa-user"></i><span>Perfil</span></a
+              >
+            </li>
+          </ul>
+          <div class="sidebar-logout">
+            <a href="login.html" data-logout class="btn btn-warning btn-block"
+              ><i class="fa fa-sign-out"></i> Sair</a
+            >
+          </div>
+        </section>
+      </aside>
+      <main class="content-wrapper">
+        <section class="content">
+          <header class="gy-page-head">
+            <div>
+              <p class="gy-eyebrow">Edição de equipe</p>
+              <h1>Editar usuário</h1>
+              <p class="gy-lead">
+                Atualize os dados do usuário selecionado e salve as mudanças.
+              </p>
+            </div>
+          </header>
+          <div class="box">
+            <div class="box-body">
+              <div class="gy-form-message" id="edit-alert"></div>
+              <form id="edit-form">
+                <section class="gy-form-section">
+                  <h3 class="gy-section-title">
+                    <i class="fa fa-user"></i> Identificação
+                  </h3>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="nome">Nome completo</label
+                        ><input
+                          class="form-control"
+                          type="text"
+                          id="edit-nome"
+                          name="nome"
+                          placeholder="Nome do usuário"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="edit-email">E-mail</label
+                        ><input
+                          class="form-control"
+                          type="email"
+                          id="edit-email"
+                          name="email"
+                          placeholder="nome@empresa.com"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label for="edit-data">Data de nascimento</label
+                        ><input
+                          class="form-control"
+                          type="date"
+                          id="edit-data"
+                          name="data_nascimento"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="gy-form-section">
+                  <h3 class="gy-section-title">
+                    <i class="fa fa-briefcase"></i> Profissional
+                  </h3>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="edit-funcao">Cargo / função</label
+                        ><input
+                          class="form-control"
+                          type="text"
+                          id="edit-funcao"
+                          name="funcao"
+                          placeholder="Ex.: Mecânico, Atendente"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="edit-cargo">Nível de acesso</label
+                        ><select
+                          class="form-control"
+                          id="edit-cargo"
+                          name="cargo"
+                          required
+                        >
+                          <option value="funcionario">Funcionário</option>
+                          <option value="gerente">Gerente</option>
+                          <option value="usuario">Usuário</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="edit-telefone">Telefone / WhatsApp</label
+                        ><input
+                          class="form-control"
+                          type="tel"
+                          id="edit-telefone"
+                          name="telefone"
+                          placeholder="(11) 99999-9999"
+                          data-mask-phone
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="gy-form-section">
+                  <h3 class="gy-section-title">
+                    <i class="fa fa-map-marker"></i> Endereço
+                  </h3>
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <div class="form-group">
+                        <label for="edit-endereco">Endereço</label
+                        ><input
+                          class="form-control"
+                          type="text"
+                          id="edit-endereco"
+                          name="endereco"
+                          placeholder="Rua, número, bairro"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label for="edit-cep">CEP</label
+                        ><input
+                          class="form-control"
+                          type="text"
+                          id="edit-cep"
+                          name="cep"
+                          placeholder="00000-000"
+                          data-mask-cep
+                        />
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="edit-cidade">Cidade</label
+                        ><input
+                          class="form-control"
+                          type="text"
+                          id="edit-cidade"
+                          name="cidade"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="edit-uf">UF</label
+                        ><input
+class="form-control gy-sm"
+                        type="text"
+                        id="edit-uf"
+                        name="uf"
+                        maxlength="2"
+                        placeholder="SP"
+                      />
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <div class="gy-actions">
+                  <button class="btn btn-success" type="submit">
+                    <i class="fa fa-save"></i> Salvar alterações</button
+                  ><a
+                    href="funcionarios.html"
+                    class="btn btn-default"
+                    >Cancelar</a
+                  >
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="js/main.js"></script>
+  </body>
+</html>

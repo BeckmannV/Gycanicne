@@ -1,0 +1,35 @@
+# ============================================================
+# Git ignore — projeto Gycanic
+# ============================================================
+
+# Credenciais e arquivos locais (NUNCA versionar)
+.env
+config.php
+.ftpquota
+
+# Arquivos de ambiente
+.env.local
+.env.production
+*.env
+
+# Logs e temporários
+*.log
+error_log
+*.tmp
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
+
+# Editores / IDE
+.vscode/
+.idea/
+
+# Dependências (caso o projeto passe a usar composer/npm)
+vendor/
+node_modules/
+
+# Envios de usuários em tempo de execução (mantidos apenas no servidor)
+# Descomente as linhas abaixo se NÃO quiser versionar as fotos enviadas.
+# uploads/*
+# !uploads/.htaccess

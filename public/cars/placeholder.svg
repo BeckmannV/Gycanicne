@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Veículo sem imagem">
+  <rect width="800" height="500" rx="16" fill="#0d2231"/>
+  <g transform="translate(400,250)">
+    <circle r="150" fill="none" stroke="#1d3a4d" stroke-width="3" stroke-dasharray="10 10"/>
+    <path d="M-85 40 L-110 70 M85 40 L110 70 M-60 55 L-75 85 M60 55 L75 85" stroke="#2a4d66" stroke-width="6" stroke-linecap="round"/>
+    <ellipse cx="0" cy="8" rx="62" ry="16" fill="#2a4d66"/>
+    <path d="M-62 8 Q-55 -26 -18 -32 L18 -32 Q55 -26 62 8 Z" fill="none" stroke="#9aabc2" stroke-width="4" stroke-linejoin="round"/>
+    <circle cx="-30" cy="28" r="9" fill="#9aabc2"/>
+    <circle cx="30" cy="28" r="9" fill="#9aabc2"/>
+  </g>
+  <text x="400" y="430" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="22" fill="#9aabc2">Imagem do veículo indisponível</text>
+</svg>

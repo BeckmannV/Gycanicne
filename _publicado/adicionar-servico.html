@@ -1,0 +1,280 @@
+﻿<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Gycanic | Novo serviço</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-protected-page>
+    <button type="button" class="gy-mobile-menu-btn" data-mobile-menu-btn aria-label="Abrir menu"><i class="fa fa-bars"></i></button>
+    <!-- Abertura de uma nova ordem de serviço. -->
+    <div class="wrapper">
+      <aside class="main-sidebar">
+        <section class="sidebar">
+          <div class="gy-logo">
+            <button
+              class="gy-sidebar-toggle"
+              type="button"
+              aria-label="Abrir menu"
+              data-sidebar-toggle
+            >
+              <span></span></button
+            ><a href="index.html" class="gy-brand"
+              ><span class="gy-accent">Gy</span>canic</a
+            >
+          </div>
+          <ul class="sidebar-menu">
+            <li>
+              <a href="index.html"
+                ><i class="fa fa-home"></i><span>Início</span></a
+              >
+            </li>
+            <li class="active">
+              <a href="oficinas.html"
+                ><i class="fa fa-wrench"></i><span>Oficinas</span></a
+              >
+            </li>
+            <li>
+              <a href="funcionarios.html"
+                ><i class="fa fa-users"></i><span>Funcionários</span></a
+              >
+            </li>
+            <li>
+              <a href="perfil.html"
+                ><i class="fa fa-user"></i><span>Perfil</span></a
+              >
+            </li>
+          </ul>
+          <div class="sidebar-logout">
+            <a href="login.html" data-logout class="btn btn-warning btn-block"
+              ><i class="fa fa-sign-out"></i> Sair</a
+            >
+          </div>
+        </section>
+      </aside>
+      <main class="content-wrapper">
+        <section class="content">
+          <header class="gy-page-head">
+            <div>
+              <p class="gy-eyebrow">Nova OS</p>
+              <h1>Registrar serviço</h1>
+              <p class="gy-lead">
+                Abra a ordem de serviço com o cliente, o veículo e o
+                responsável pelo atendimento.
+              </p>
+            </div>
+            <a href="servicos.html" class="btn btn-default"
+              ><i class="fa fa-arrow-left"></i> Voltar</a
+            >
+          </header>
+          <div class="box">
+            <div class="box-body">
+              <!-- Salva a OS no banco pelo backend PHP e vai para o acompanhamento. -->
+              <form action="backend/adicionar-servico.php" method="post">
+                <section class="gy-form-section">
+                  <h3 class="gy-section-title">
+                    <i class="fa fa-car"></i> Serviço
+                  </h3>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label for="titulo">Título do serviço</label
+                        ><input
+                          class="form-control"
+                          type="text"
+                          id="titulo"
+                          name="titulo"
+                          placeholder="Ex.: SUV preto com falha ao acelerar"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label for="servico">Trabalho atribuído</label
+                        ><input
+                          class="form-control"
+                          type="text"
+                          id="servico"
+                          name="servico"
+                          placeholder="Ex.: Diagnóstico + reparo elétrico"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="gy-form-section">
+                  <h3 class="gy-section-title">
+                    <i class="fa fa-user-circle"></i> Cliente
+                  </h3>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="cliente">Nome do cliente</label
+                        ><input
+                          class="form-control"
+                          type="text"
+                          id="cliente"
+                          name="cliente"
+                          placeholder="Nome completo"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="cliente_telefone">Telefone / WhatsApp</label
+                        ><input
+                          class="form-control"
+                          type="tel"
+                          id="cliente_telefone"
+                          name="cliente_telefone"
+                          placeholder="(11) 99999-9999"
+                          data-mask-phone
+                        />
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="cliente_email">E-mail</label
+                        ><input
+                          class="form-control"
+                          type="email"
+                          id="cliente_email"
+                          name="cliente_email"
+                          placeholder="cliente@email.com"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="gy-form-section">
+                  <h3 class="gy-section-title">
+                    <i class="fa fa-truck"></i> Veículo
+                  </h3>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="fipe-marca">Marca</label
+                        ><select
+                          class="form-control"
+                          id="fipe-marca"
+                          name="veiculo_marca"
+                          data-fipe-marca
+                        >
+                          <option value="">Carregando marcas…</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="fipe-modelo">Modelo</label
+                        ><input
+                          class="form-control"
+                          type="text"
+                          id="fipe-modelo"
+                          name="veiculo_modelo"
+                          data-fipe-modelo
+                          list="fipe-modelos-list"
+                          autocomplete="off"
+                          placeholder="Selecione a marca primeiro…"
+                          disabled
+                        />
+                        <datalist id="fipe-modelos-list"></datalist>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="fipe-ano">Ano</label
+                        ><select
+                          class="form-control"
+                          id="fipe-ano"
+                          name="veiculo_ano"
+                          data-fipe-ano
+                          disabled
+                        >
+                          <option value="">Selecione o modelo primeiro…</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="form-group">
+                        <label for="placa">Placa</label
+                        ><input
+                          class="form-control"
+                          type="text"
+                          id="placa"
+                          name="placa"
+                          placeholder="ABC-1234"
+                          maxlength="8"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="form-group">
+                        <label for="cor">Cor</label
+                        ><input
+                          class="form-control"
+                          type="text"
+                          id="cor"
+                          name="cor"
+                          placeholder="Ex.: Preto"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="funcionario_id">Responsável pelo serviço</label
+                        ><select
+                          class="form-control"
+                          id="funcionario_id"
+                          name="funcionario_id"
+                        >
+                          <option value="0">— Sem responsável —</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="gy-veiculo-painel gy-hidden" data-veiculo-painel>
+                    <div class="gy-veiculo-foto">
+                      <img class="gy-veiculo-img" data-veiculo-img alt="" loading="lazy" />
+                      <div class="gy-veiculo-loading" data-veiculo-loading hidden>
+                        <i class="fa fa-spinner fa-spin"></i>
+                      </div>
+                    </div>
+                    <div class="gy-veiculo-info">
+                      <p class="gy-eyebrow">Seu veículo</p>
+                      <h4 data-veiculo-nome>—</h4>
+                      <p class="gy-info-val"><i class="fa fa-tag"></i> <span data-veiculo-preco>—</span></p>
+                      <p class="gy-info-val"><i class="fa fa-barcode"></i> <span data-veiculo-fipe>—</span></p>
+                      <p class="gy-info-val"><i class="fa fa-calendar-o"></i> <span data-veiculo-ref>—</span></p>
+                    </div>
+                  </div>
+
+                  <input type="hidden" id="veiculo" name="veiculo" data-veiculo-resumo />
+                  <input type="hidden" id="veiculo_marca_id" name="veiculo_marca_id" data-veiculo-marca-id />
+                  <input type="hidden" id="veiculo_modelo_id" name="veiculo_modelo_id" data-veiculo-modelo-id />
+                  <input type="hidden" name="veiculo_ano_id" data-veiculo-ano-id />
+                  <input type="hidden" name="ano" data-veiculo-ano-num />
+                </section>
+<div class="gy-actions">
+                  <button class="btn btn-success" type="submit">
+                    <i class="fa fa-check"></i> Abrir serviço</button
+                  ><a href="servicos.html" class="btn btn-default">Cancelar</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="js/main.js"></script>
+  </body>
+</html>
