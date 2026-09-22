@@ -1,4 +1,4 @@
-# Os arquivos de layout são internos: acesso direto pela URL é bloqueado.
-<FilesMatch "\.php$">
+# Os arquivos de layout e os logs são internos: acesso direto pela URL é bloqueado.
+<FilesMatch "\.(php|log)$">
   Require all denied
 </FilesMatch>

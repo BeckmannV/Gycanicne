@@ -106,7 +106,7 @@ function gy_email_api(string $para, string $assunto, string $html, string $de, s
     // Sucesso também fica registrado (sem o corpo do e-mail) para diagnóstico.
     $json = json_decode((string) $resposta, true);
     @file_put_contents(
-        __DIR__ . '/mail.log',
+        __DIR__ . '/api/mail.log',
         '[OK brevo] para: ' . $para . ' | HTTP ' . $status . ' | messageId: ' . ($json['messageId'] ?? '-') . "\n",
         FILE_APPEND
     );
