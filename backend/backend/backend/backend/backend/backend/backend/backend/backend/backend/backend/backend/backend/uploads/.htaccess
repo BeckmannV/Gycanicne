@@ -1,4 +1,0 @@
-# Bloqueia execução de scripts em arquivos enviados pelos usuários.
-<FilesMatch "\.(php|php5|phtml|phar|pl|py|cgi)$">
-  Require all denied
-</FilesMatch>
