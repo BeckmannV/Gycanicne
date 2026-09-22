@@ -1,333 +1,3 @@
-<!doctype html>
-<html lang="pt-BR" data-bs-theme="dark">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Gycanic | Perfil</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <style>
-      /* Tema Gycanic: paleta escura do site publicado + laranja #f97316 */
-      [data-bs-theme="dark"] {
-        --bs-warning: #f97316;
-        --bs-warning-rgb: 249,115,22;
-        --bs-body-bg: #081c28;
-        --bs-border-color: #1d3a4d;
-        --bs-secondary-color: rgba(154, 171, 194, 0.75);
-        --bs-emphasis-color: #f8fafc;
-        --bs-body-font-family: "Inter", "Segoe UI", system-ui, sans-serif;
-      }
-      .card {
-        --bs-card-bg: #0a2230;
-      }
-      aside.sticky-md-top {
-        background-color: #06121c;
-        width: 250px;
-        min-width: 250px;
-        max-width: 250px;
-      }
-      @media (max-width: 767.98px) {
-        aside.sticky-md-top {
-          width: 100%;
-          min-width: 0;
-          max-width: 100%;
-        }
-      }
-      .form-control,
-      .form-select {
-        background-color: #102c3d;
-        border-color: #1d3a4d;
-        color: #f8fafc;
-      }
-      .form-control:focus,
-      .form-select:focus {
-        background-color: #102c3d;
-        border-color: #2a4d66;
-        color: #f8fafc;
-      }
-      .btn-warning {
-        --bs-btn-color: #3b1a05;
-        --bs-btn-bg: #fb923c;
-        --bs-btn-border-color: #fb923c;
-        --bs-btn-hover-color: #3b1a05;
-        --bs-btn-hover-bg: #f97316;
-        --bs-btn-hover-border-color: #f97316;
-        --bs-btn-focus-shadow-rgb: 249,115,22;
-        --bs-btn-active-color: #3b1a05;
-        --bs-btn-active-bg: #ea580c;
-        --bs-btn-active-border-color: #ea580c;
-        --bs-btn-disabled-color: #3b1a05;
-        --bs-btn-disabled-bg: #fb923c;
-        --bs-btn-disabled-border-color: #fb923c;
-        --bs-btn-border-radius: 12px;
-        --bs-btn-font-weight: 700;
-        --bs-btn-padding-y: 11px;
-        --bs-btn-padding-x: 17px;
-      }
-      .btn-outline-warning {
-        --bs-btn-color: #3b1a05;
-        --bs-btn-bg: #fb923c;
-        --bs-btn-border-color: #fb923c;
-        --bs-btn-hover-color: #3b1a05;
-        --bs-btn-hover-bg: #f97316;
-        --bs-btn-hover-border-color: #f97316;
-        --bs-btn-focus-shadow-rgb: 249,115,22;
-        --bs-btn-active-color: #3b1a05;
-        --bs-btn-active-bg: #ea580c;
-        --bs-btn-active-border-color: #ea580c;
-        --bs-btn-border-radius: 12px;
-        --bs-btn-font-weight: 700;
-        --bs-btn-padding-y: 11px;
-        --bs-btn-padding-x: 17px;
-      }
-      select option {
-        background-color: #0a2230;
-        color: #f8fafc;
-      }
-      aside .nav-link {
-        color: #b9c7da;
-      }
-      aside .nav-link:hover {
-        color: #ffffff;
-        background-color: rgba(249, 115, 22, 0.15);
-      }
-      /* Sidebar full-height apenas no desktop; no mobile fica com altura natural */
-      @media (min-width: 768px) {
-        .gy-sidebar {
-          min-height: 100vh;
-          position: sticky;
-          top: 0;
-          align-self: flex-start;
-          max-height: 100vh;
-          overflow-y: auto;
-          scrollbar-width: thin;
-        }
-      }
-      /* Botao Entrar: alinhamento vertical do texto + icone */
-      .btn-default-gy {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-      }
-      /* Alertas via query string: dentro do layout, nunca no <body> */
-      body > .alert-dismissible {
-        display: none !important;
-      }
-      /* Sombra lateral da sidebar (igual a producao) */
-      aside.gy-sidebar {
-        box-shadow: 4px 0 18px rgba(0, 0, 0, 0.28);
-    
-      .text-accent {
-        -webkit-text-fill-color: #ea580c;
-      }
-      .gy-topbar-avatar {
-        color: #7c2d12;
-        background-color: var(--bs-warning);
-        border: 2px solid rgba(251, 146, 60, 0.35);
-        font-weight: 800;
-      }
-      .gy-stat-underline::after {
-        content: "";
-        display: block;
-        width: 24px;
-        height: 2px;
-        background: var(--bs-warning);
-        margin-top: 14px;
-      }
-      .text-bg-warning {
-        color: #3b1a05 !important;
-      }
-    </style>
-
-  </head>
-  <body class="d-flex flex-column flex-md-row bg-body" data-protected-page>
-    <!-- Página protegida: a sessão é validada pelo main.js. -->
-    <aside class="d-flex flex-column flex-shrink-0 p-3 border-end border-secondary gy-sidebar col-md-3 col-lg-2">
-      <a href="index.html" class="fs-4 fw-bolder text-decoration-none text-white d-flex align-items-center mb-3">
-        <span class="text-warning">Gy</span>canic
-      </a>
-      <ul class="nav flex-column gap-1">
-        <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-2 rounded-3 px-3 py-2 text-white-50" href="index.html"><i class="bi bi-house-door"></i> Início</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-2 rounded-3 px-3 py-2 text-white-50" href="oficinas.html"><i class="bi bi-wrench"></i> Oficinas</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-2 rounded-3 px-3 py-2 text-white-50" href="funcionarios.html"><i class="bi bi-people"></i> Funcionários</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-2 rounded-3 px-3 py-2 bg-warning text-white fw-semibold" href="perfil.html"><i class="bi bi-person"></i> Perfil</a>
-        </li>
-      </ul>
-      <div class="mt-auto pt-3">
-        <a href="login.html" data-logout class="btn btn-warning w-100"><i class="bi bi-box-arrow-right"></i> Sair</a>
-      </div>
-    </aside>
-    <main class="flex-grow-1 min-vh-100">
-      <section class="container-xl py-4">
-        <header class="mb-4">
-          <p class="text-warning text-uppercase fw-semibold small mb-1">Sua conta</p>
-          <h1 class="h2 fw-bold mb-1">Perfil</h1>
-          <p class="text-secondary mb-0">
-            Mantenha suas informações pessoais atualizadas.
-          </p>
-        </header>
-        <div class="card bg-dark border-secondary rounded-4 mb-4">
-          <div class="card-body p-4">
-            <div class="d-flex align-items-center gap-3 mb-4">
-              <div class="position-relative">
-                <img
-                  id="profile-avatar-img"
-                  alt="Foto de perfil"
-                  class="rounded-circle object-fit-cover"
-                  width="96"
-                  height="96"
-                  hidden
-                />
-                <span
-                  id="profile-avatar-initial"
-                  class="d-inline-flex align-items-center justify-content-center rounded-circle text-bg-secondary fw-bold p-4 fs-2"
-                >?</span>
-              </div>
-              <div>
-                <h2 class="h4 fw-bold mb-1" id="profile-title">Meu perfil</h2>
-                <p class="text-secondary small mb-2">Gerencie sua foto e suas informações pessoais.</p>
-                <button
-                  type="button"
-                  class="btn btn-sm btn-outline-warning"
-                  id="profile-avatar-edit"
-                  aria-label="Editar foto"
-                  title="Editar foto"
-                >
-                  <i class="bi bi-camera"></i> Trocar foto
-                </button>
-              </div>
-            </div>
-            <form id="profile-form">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="mb-3">
-                    <label for="nome" class="form-label">Nome</label>
-                    <input id="nome" name="nome" class="form-control" placeholder="Seu nome" autocomplete="name" />
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="mb-3">
-                    <label for="email" class="form-label">E-mail</label>
-                    <input
-                      id="email"
-                      name="email"
-                      class="form-control"
-                      type="email"
-                      placeholder="seuemail@exemplo.com"
-                      readonly
-                      disabled
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="mb-3">
-                <label for="foto" class="form-label">Foto de perfil</label>
-                <input id="foto" name="foto" type="file" accept="image/*" class="form-control" />
-                <span class="text-secondary small">
-                  Toque na câmera para escolher uma foto. JPG, PNG, GIF, WEBP — máx. 2 MB.
-                </span>
-              </div>
-              <div id="profile-alert" role="alert"></div>
-              <button class="btn btn-warning fw-semibold" type="submit">
-                Salvar alterações
-              </button>
-            </form>
-          </div>
-        </div>
-        <div class="card bg-dark border-secondary rounded-4 mb-4">
-          <div class="card-body p-4">
-            <h2 class="h5 fw-bold mb-4">
-              <i class="bi bi-person-vcard text-warning"></i> Dados da conta
-            </h2>
-            <div class="row g-3">
-              <div class="col-md-4">
-                <span class="text-secondary small text-uppercase d-block">Cargo</span>
-                <span class="fw-semibold" id="profile-cargo">—</span>
-              </div>
-              <div class="col-md-4">
-                <span class="text-secondary small text-uppercase d-block">E-mail</span>
-                <span class="fw-semibold" id="profile-email-info">—</span>
-              </div>
-              <div class="col-md-4">
-                <span class="text-secondary small text-uppercase d-block">Membro desde</span>
-                <span class="fw-semibold" id="profile-membro">—</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card bg-dark border-secondary rounded-4">
-          <div class="card-body p-4">
-            <h2 class="h5 fw-bold mb-1">
-              <i class="bi bi-lock text-warning"></i> Segurança
-            </h2>
-            <p class="text-secondary small">
-              Altere sua senha periodicamente para manter sua conta segura.
-            </p>
-            <form id="senha-form">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="senha-atual" class="form-label">Senha atual</label>
-                    <input
-                      class="form-control"
-                      type="password"
-                      id="senha-atual"
-                      name="senha_atual"
-                      autocomplete="current-password"
-                      required
-                    />
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="nova-senha" class="form-label">Nova senha</label>
-                    <input
-                      class="form-control"
-                      type="password"
-                      id="nova-senha"
-                      name="nova_senha"
-                      minlength="6"
-                      autocomplete="new-password"
-                      required
-                    />
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="confirmar-senha" class="form-label">Confirmar nova senha</label>
-                    <input
-                      class="form-control"
-                      type="password"
-                      id="confirmar-senha"
-                      name="confirmar_senha"
-                      minlength="6"
-                      autocomplete="new-password"
-                      required
-                    />
-                  </div>
-                </div>
-              </div>
-              <div id="senha-alert" role="alert"></div>
-              <button class="btn btn-warning fw-semibold" type="submit">
-                <i class="bi bi-key"></i> Atualizar senha
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
 /**
  * =============================================================
  * ARQUIVO: main.js
@@ -643,7 +313,7 @@
         preencherIdentidadeSidebar(data.usuario);
       })
       .catch(function () {
-        window.location.href = 'index.html?auth=1';
+        window.location.href = 'index.php?auth=1';
       });
   }
 
@@ -661,7 +331,7 @@
       })
         .catch(function () { /* segue o fluxo mesmo se falhar */ })
         .then(function () {
-          window.location.href = 'login.html';
+          window.location.href = 'login.php';
         });
     });
   });
@@ -706,7 +376,7 @@
           var logoutContainer = document.getElementById('sidebar-actions-container');
           if (logoutContainer && !logoutContainer.querySelector('[data-logout]')) {
             logoutContainer.innerHTML =
-              '<a href="login.html" data-logout class="btn btn-warning w-100 mt-2"><i class="bi bi-box-arrow-right"></i> Sair</a>';
+              '<a href="login.php" data-logout class="btn btn-warning w-100 mt-2"><i class="bi bi-box-arrow-right"></i> Sair</a>';
           }
           var heroH1 = document.querySelector('[data-hero-title]');
           if (heroH1) {
@@ -824,7 +494,7 @@ var container = painel.closest('.tab-content');
             '<i class="bi bi-buildings display-6 text-warning"></i>' +
             '<h3 class="h5 fw-bold text-white mt-3">Nenhuma oficina cadastrada</h3>' +
             '<p class="mb-3">Tente alterar os filtros ou cadastrar uma nova oficina.</p>' +
-            '<a class="btn btn-success" href="adicionar-oficina.html"><i class="bi bi-plus-lg"></i> Nova oficina</a>' +
+            '<a class="btn btn-success" href="adicionar-oficina.php"><i class="bi bi-plus-lg"></i> Nova oficina</a>' +
             '</div></div>';
           return;
         }
@@ -841,7 +511,7 @@ var container = painel.closest('.tab-content');
               '</div>' +
               '<div class="card-footer bg-white border-0 d-flex justify-content-between align-items-center">' +
               '<small class="text-secondary">' + formatarData(o.criado_em) + '</small>' +
-              '<a class="btn btn-sm btn-outline-warning" href="oficina-detalhe.html">Ver unidade <i class="bi bi-arrow-right"></i></a>' +
+              '<a class="btn btn-sm btn-outline-warning" href="oficina-detalhe.php">Ver unidade <i class="bi bi-arrow-right"></i></a>' +
               '</div>' +
               '</article>' +
               '</div>'
@@ -948,7 +618,7 @@ var container = painel.closest('.tab-content');
             '<td><span class="badge ' + (f.cargo === 'gerente' ? 'text-bg-warning' : 'text-bg-secondary') + '">' + rotulo + '</span></td>' +
             '<td>' + formatarData(f.criado_em) + '</td>' +
             '<td class="text-nowrap">' +
-            '<a class="btn btn-sm btn-outline-warning me-1" href="editar-funcionario.html?id=' + f.id + '"><i class="bi bi-pencil"></i> Editar</a>' +
+            '<a class="btn btn-sm btn-outline-warning me-1" href="editar-funcionario.php?id=' + f.id + '"><i class="bi bi-pencil"></i> Editar</a>' +
             '<button type="button" class="btn btn-sm btn-outline-danger" data-del-func="' + f.id + '" data-nome-func="' + gyEsc(f.nome) + '" aria-label="Excluir funcionário">' +
             '<i class="bi bi-trash"></i></button>' +
             '</td>' +
@@ -1840,7 +1510,7 @@ var container = painel.closest('.tab-content');
         if (!OS.length) {
           recentOs.innerHTML =
             '<li class="list-group-item text-secondary">Nenhuma ordem de serviço ainda.' +
-            ' <a href="adicionar-servico.html">Crie a primeira</a>.</li>';
+            ' <a href="adicionar-servico.php">Crie a primeira</a>.</li>';
           return;
         }
         recentOs.innerHTML = OS.map(function (s) {
@@ -1868,7 +1538,7 @@ var container = painel.closest('.tab-content');
       if (!lista.length) {
         svcListaEl.innerHTML =
           '<li class="list-group-item text-center text-secondary py-5">Nenhuma ordem de serviço ainda.' +
-          ' <a href="adicionar-servico.html">Crie a primeira</a>.</li>';
+          ' <a href="adicionar-servico.php">Crie a primeira</a>.</li>';
         return;
       }
       svcListaEl.innerHTML = lista
@@ -1876,7 +1546,7 @@ var container = painel.closest('.tab-content');
           var rotulo = ROTULO_STATUS[s.status] || s.status || 'Em andamento';
           return (
             '<li class="list-group-item d-flex align-items-center gap-3 flex-wrap" data-svc-item="' + s.id + '">' +
-            '<a class="d-flex align-items-center gap-3 flex-grow-1 text-decoration-none text-white" href="servicos.html?id=' + s.id + '">' +
+            '<a class="d-flex align-items-center gap-3 flex-grow-1 text-decoration-none text-white" href="servicos.php?id=' + s.id + '">' +
             '<span class="badge text-bg-dark">OS ' + s.id + '</span>' +
             '<span class="flex-grow-1">' +
             '<strong class="d-block">' + gyEsc(s.titulo || 'Serviço sem título') + '</strong>' +
@@ -1946,6 +1616,3 @@ var container = painel.closest('.tab-content');
 })();
 
 
-</script>
-  </body>
-</html>

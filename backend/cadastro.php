@@ -3,7 +3,7 @@
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ../cadastro.html');
+    header('Location: ../cadastro.php');
     exit;
 }
 
@@ -14,24 +14,24 @@ $email = trim((string) filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL))
 $senha = $_POST['senha'] ?? '';
 $confirmacao = $_POST['confirmar-senha'] ?? '';
 if ($nome === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || $senha === '') {
-    header('Location: ../cadastro.html?erro=campos_vazios');
+    header('Location: ../cadastro.php?erro=campos_vazios');
     exit;
 }
 
 if (strlen($senha) < 6) {
-    header('Location: ../cadastro.html?erro=senha_curta');
+    header('Location: ../cadastro.php?erro=senha_curta');
     exit;
 }
 
 if ($senha !== $confirmacao) {
-    header('Location: ../cadastro.html?erro=senhas_diferentes');
+    header('Location: ../cadastro.php?erro=senhas_diferentes');
     exit;
 }
 
 $verifica = $pdo->prepare('SELECT id FROM tblUsuarios WHERE email = :email LIMIT 1');
 $verifica->execute([':email' => $email]);
 if ($verifica->fetch()) {
-    header('Location: ../cadastro.html?erro=email_existe');
+    header('Location: ../cadastro.php?erro=email_existe');
     exit;
 }
 
@@ -48,5 +48,5 @@ $_SESSION['usuario_id'] = (int) $pdo->lastInsertId();
 $_SESSION['usuario_nome'] = $nome;
 $_SESSION['usuario_email'] = $email;
 $_SESSION['usuario_tipo'] = 'usuario';
-header('Location: ../oficinas.html');
+header('Location: ../oficinas.php');
 exit;

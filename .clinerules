@@ -1,0 +1,30 @@
+# Regras do projeto Gycanic
+
+## Contexto
+Sistema web acadêmico de gestão de oficinas mecânicas.
+- Front: HTML5 + Bootstrap 5.3 (CDN) + JS puro (sem jQuery, IIFE com prefixo `gy`/`GY`).
+- Páginas são `.php` na raiz e só contêm o próprio conteúdo; o layout fica em `includes/` (`topo.php`, `sidebar.php`, `rodape.php`, `auth.php`).
+- CSS único em `css/style.css` e JS único em `js/main.js` (nunca voltar a inlinar `<style>`/`<script>` nas páginas).
+- Páginas internas exigem sessão (`includes/auth.php`); `$protegida = false` libera páginas públicas.
+- Back: PHP 8 (PDO, sessões) em `backend/` (endpoints JSON) + MySQL/MariaDB.
+- Banco: `database/gycanic.sql` (tblUsuarios, tblOficinas, tblServicos, tblProblemas).
+- Repo: `git@github.com:BeckmannV/Gycanicne.git` (branch `main`, push via SSH).
+- Deploy: HostGator (uploads via FTP). `larpagem/` é mini-jogo paralelo.
+
+## Segurança (obrigatório)
+- Nunca versionar: `backend/config.php`, `.env`, `error_log`, `.ftpquota` (já no `.gitignore`).
+- Use `backend/config.example.php` como modelo de credenciais.
+- Antes de qualquer `git push`, conferir: `git ls-tree -r --name-only HEAD | grep -iE '(^|/)(config\.php|\.env)$'`.
+
+## Convenções
+- Editar arquivos com a tool `editor`; não reescrever arquivos com `sed`/`cat`.
+- Textos, comentários e commits em português; commits no estilo conventional (`feat:`, `fix:`, `docs:`).
+- Manter o padrão visual existente (tema escuro + laranja `#f97316`, Bootstrap 5.3).
+- Preferir JS puro e PHP com PDO; não introduzir dependências novas sem necessidade.
+
+## Economia de tokens (importante)
+- Respostas curtas: nenhum resumo longo, sem repetir código já mostrado.
+- Rodar comandos em lote (um `run_commands` com várias entradas) e evitar reexecuções.
+- Saída de comandos grande: redirecionar para `/tmp/<nome>.txt` e ler com `read_files` (a captura de stdout do terminal falha em saídas longas).
+- Ler apenas trechos de arquivos (`start_line`/`end_line`) em vez de arquivos inteiros.
+- Não usar `chrome-devtools`/`playwright` sem necessidade real.

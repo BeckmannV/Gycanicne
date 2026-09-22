@@ -1,0 +1,151 @@
+      /* Tema Gycanic: paleta escura do site publicado + laranja #f97316 */
+      [data-bs-theme="dark"] {
+        --bs-warning: #f97316;
+        --bs-warning-rgb: 249,115,22;
+        --bs-body-bg: #081c28;
+        --bs-border-color: #1d3a4d;
+        --bs-secondary-color: rgba(154, 171, 194, 0.75);
+        --bs-emphasis-color: #f8fafc;
+        --bs-body-font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+      }
+      .card {
+        --bs-card-bg: #0a2230;
+      }
+      aside.sticky-md-top {
+        background-color: #06121c;
+        width: 250px;
+        min-width: 250px;
+        max-width: 250px;
+      }
+      @media (max-width: 767.98px) {
+        aside.sticky-md-top {
+          width: 100%;
+          min-width: 0;
+          max-width: 100%;
+        }
+      }
+      .form-control,
+      .form-select {
+        background-color: #102c3d;
+        border-color: #1d3a4d;
+        color: #f8fafc;
+      }
+      .form-control:focus,
+      .form-select:focus {
+        background-color: #102c3d;
+        border-color: #2a4d66;
+        color: #f8fafc;
+      }
+      .btn-warning {
+        --bs-btn-color: #3b1a05;
+        --bs-btn-bg: #fb923c;
+        --bs-btn-border-color: #fb923c;
+        --bs-btn-hover-color: #3b1a05;
+        --bs-btn-hover-bg: #f97316;
+        --bs-btn-hover-border-color: #f97316;
+        --bs-btn-focus-shadow-rgb: 249,115,22;
+        --bs-btn-active-color: #3b1a05;
+        --bs-btn-active-bg: #ea580c;
+        --bs-btn-active-border-color: #ea580c;
+        --bs-btn-disabled-color: #3b1a05;
+        --bs-btn-disabled-bg: #fb923c;
+        --bs-btn-disabled-border-color: #fb923c;
+        --bs-btn-border-radius: 12px;
+        --bs-btn-font-weight: 700;
+        --bs-btn-padding-y: 11px;
+        --bs-btn-padding-x: 17px;
+      }
+      .btn-outline-warning {
+        --bs-btn-color: #3b1a05;
+        --bs-btn-bg: #fb923c;
+        --bs-btn-border-color: #fb923c;
+        --bs-btn-hover-color: #3b1a05;
+        --bs-btn-hover-bg: #f97316;
+        --bs-btn-hover-border-color: #f97316;
+        --bs-btn-focus-shadow-rgb: 249,115,22;
+        --bs-btn-active-color: #3b1a05;
+        --bs-btn-active-bg: #ea580c;
+        --bs-btn-active-border-color: #ea580c;
+        --bs-btn-border-radius: 12px;
+        --bs-btn-font-weight: 700;
+        --bs-btn-padding-y: 11px;
+        --bs-btn-padding-x: 17px;
+      }
+      select option {
+        background-color: #0a2230;
+        color: #f8fafc;
+      }
+      aside .nav-link {
+        color: #b9c7da;
+      }
+      aside .nav-link:hover {
+        color: #ffffff;
+        background-color: rgba(249, 115, 22, 0.15);
+      }
+      /* Sidebar full-height apenas no desktop; no mobile fica com altura natural */
+      @media (min-width: 768px) {
+        .gy-sidebar {
+          min-height: 100vh;
+          position: sticky;
+          top: 0;
+          align-self: flex-start;
+          max-height: 100vh;
+          overflow-y: auto;
+          scrollbar-width: thin;
+        }
+      }
+      /* Botao Entrar: alinhamento vertical do texto + icone */
+      .btn-default-gy {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      /* Alertas via query string: dentro do layout, nunca no <body> */
+      body > .alert-dismissible {
+        display: none !important;
+      }
+      /* Sombra lateral da sidebar (igual a producao) */
+      aside.gy-sidebar {
+        box-shadow: 4px 0 18px rgba(0, 0, 0, 0.28);
+    
+      .text-accent {
+        -webkit-text-fill-color: #ea580c;
+      }
+      .gy-topbar-avatar {
+        color: #7c2d12;
+        background-color: var(--bs-warning);
+        border: 2px solid rgba(251, 146, 60, 0.35);
+        font-weight: 800;
+      }
+      .btn-default-gy {
+        color: #2b1203 !important;
+        background: #ea580c !important;
+        border: 1px solid rgba(251, 146, 60, 0.35) !important;
+        border-radius: 12px;
+        font-weight: 700;
+      }
+      .gy-stats-row {
+        border: 1px solid var(--bs-border-color);
+        border-radius: 20px;
+        background: #0a2230;
+      }
+      .gy-stats-row > [class*="col-"] + [class*="col-"] {
+        border-left: 1px solid var(--bs-border-color);
+      }
+      @media (max-width: 767.98px) {
+        .gy-stats-row > [class*="col-"] + [class*="col-"] {
+          border-left: 0;
+          border-top: 1px solid var(--bs-border-color);
+        }
+      }
+      .gy-stat-underline::after {
+        content: "";
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--bs-warning);
+        margin-top: 14px;
+      }
+      .text-bg-warning {
+        color: #3b1a05 !important;
+      }

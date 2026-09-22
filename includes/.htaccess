@@ -1,0 +1,4 @@
+# Os arquivos de layout são internos: acesso direto pela URL é bloqueado.
+<FilesMatch "\.php$">
+  Require all denied
+</FilesMatch>

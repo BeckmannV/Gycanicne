@@ -16,14 +16,15 @@ acompanhamento dos problemas identificados em cada veículo.
 
 | Caminho | Descrição |
 | --- | --- |
-| `*.html` | Telas do sistema (`index`, `login`, `cadastro`, `perfil`, `funcionarios`, `oficinas`, `oficina-detalhe`, `servicos`, `servicos-lista`, `adicionar-*`, `editar-funcionario`) |
+| `*.php` | Páginas do sistema (`index`, `login`, `cadastro`, `perfil`, `funcionarios`, `oficinas`, `oficina-detalhe`, `servicos`, `servicos-lista`, `adicionar-*`, `editar-funcionario`) |
+| `includes/` | Layout compartilhado: `topo.php` (cabeçalho + menu), `sidebar.php`, `rodape.php` e `auth.php` (sessão) |
+| `css/style.css` | Tema escuro/laranja (antes repetido dentro de cada página) |
+| `js/main.js` | Todo o JavaScript do site (antes repetido dentro de cada página) |
 | `backend/` | Endpoints PHP: autenticação, CRUD de usuários/oficinas/serviços, upload de fotos e integração FIPE |
 | `backend/fipe_cache/` | Cache em JSON das respostas da API FIPE |
 | `database/gycanic.sql` | Criação das tabelas (`tblUsuarios`, `tblOficinas`, `tblServicos`, `tblProblemas`) |
 | `uploads/` | Fotos de perfil enviadas pelos usuários |
 | `public/banners/` | Imagens usadas nas telas |
-| `_publicado/` | Cópia publicada das telas (material de apoio) |
-| `_ref/` | Telas de referência usadas durante o desenvolvimento |
 | `larpagem/` | Mini-jogo (projeto paralelo) hospedado na mesma pasta |
 
 ## Como rodar localmente (XAMPP / LAMP)
@@ -39,7 +40,32 @@ acompanhamento dos problemas identificados em cada veículo.
    ```
    Por padrão o bloco `local` aponta para `127.0.0.1`, banco `gycanic`,
    usuário `root` e senha vazia (padrão do XAMPP).
-4. Acesse `http://localhost/gycanic/index.html`.
+4. Acesse `http://localhost/gycanic/index.php`.
+
+## Como criar uma nova página
+
+O cabeçalho, o menu lateral e os scripts ficam em `includes/` — a página só
+contém o próprio conteúdo:
+
+```php
+<?php
+$titulo = 'Serviços';   // título da aba
+$ativo  = 'servicos';   // item do menu a destacar ('' = nenhum)
+require __DIR__ . '/includes/topo.php';
+?>
+  <section class="container-xl py-4">
+    <h1 class="h3">Serviços</h1>
+    <!-- ...conteúdo Bootstrap... -->
+  </section>
+<?php require __DIR__ . '/includes/rodape.php'; ?>
+```
+
+Variáveis opcionais: `$protegida = false;` em páginas públicas (login, cadastro,
+início) e `$menu = false;` em páginas sem menu lateral.
+
+Páginas internas exigem sessão: quem não está logado é redirecionado para
+`login.php` pelo `includes/auth.php` (a checagem é feita no servidor, não só
+pelo JavaScript).
 
 ### Variáveis de ambiente (opcional)
 
