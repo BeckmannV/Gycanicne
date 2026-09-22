@@ -1,6 +1,7 @@
 # URLs antigas (.html) continuam funcionando e são redirecionadas para .php
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  RewriteBase /
   RewriteRule ^([a-z0-9-]+)\.html$ $1.php [R=301,L]
 </IfModule>
 
