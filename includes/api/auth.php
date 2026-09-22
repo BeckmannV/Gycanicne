@@ -1,7 +1,8 @@
 <?php
 /**
- * backend/auth.php
+ * includes/api/auth.php
  * Verifica se o usuário está autenticado e retorna JSON.
+ * Acessada por: api.php?acao=auth
  */
 
 session_start();

@@ -15,7 +15,7 @@ require __DIR__ . '/includes/topo.php';
         <div class="card bg-dark border-secondary rounded-4">
           <div class="card-body p-4">
             <!-- Salva os dados no banco por meio do backend PHP. -->
-            <form action="backend/adicionar-oficina.php" method="post">
+            <form action="api.php?acao=adicionar-oficina" method="post">
               <div class="row">
                 <div class="col-md-6">
                   <div class="mb-3">

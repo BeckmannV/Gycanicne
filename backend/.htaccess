@@ -1,4 +1,0 @@
-# Impede acesso direto ao arquivo que contém credenciais do banco.
-<Files "config.php">
-  Require all denied
-</Files>

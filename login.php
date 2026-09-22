@@ -17,7 +17,7 @@ require __DIR__ . '/includes/topo.php';
               Acompanhe sua operação e deixe a gestão da oficina mais leve.
             </p>
             <!-- Envia as credenciais para o PHP, que cria a sessão. -->
-            <form action="backend/login.php" method="post" class="mt-4">
+            <form action="api.php?acao=login" method="post" class="mt-4">
               <div class="alert alert-danger d-none" data-login-error></div>
               <div class="mb-3">
                 <label for="email" class="form-label">E-mail</label>

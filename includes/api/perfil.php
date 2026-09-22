@@ -1,6 +1,6 @@
 <?php
 /**
- * backend/perfil.php
+ * api.php?acao=perfil
  * Atualiza nome e foto de perfil do usuário logado.
  * GET  -> devolve os dados atuais (id, nome, email, cargo, foto).
  * POST -> salva nome e/ou foto (multipart/form-data).
@@ -18,7 +18,7 @@ if (!isset($_SESSION['usuario_id'])) {
 require_once __DIR__ . '/db.php';
 
 // Diretório dedicado às fotos dos usuários.
-$fotoDir = __DIR__ . '/../uploads';
+$fotoDir = dirname(__DIR__, 2) . '/uploads';
 if (!is_dir($fotoDir)) {
     mkdir($fotoDir, 0775, true);
 }

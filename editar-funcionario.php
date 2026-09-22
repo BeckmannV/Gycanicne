@@ -16,7 +16,7 @@ require __DIR__ . '/includes/topo.php';
           <div class="card-body p-4">
             <!-- Mensagens de retorno (controladas pelo main.js). -->
             <div id="edit-alert" role="alert"></div>
-            <!-- Salva os dados via backend/editar-funcionario.php (fetch do main.js). -->
+            <!-- Salva os dados via api.php?acao=editar-funcionario (fetch do main.js). -->
             <form id="edit-form">              <section class="mb-4">
                 <h3 class="h6 text-uppercase text-secondary fw-semibold mb-3">
                   <i class="bi bi-person"></i> Identificação

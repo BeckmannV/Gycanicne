@@ -18,7 +18,7 @@ require __DIR__ . '/includes/topo.php';
             </p>
             <!-- Dados enviados ao PHP responsável pelo cadastro. -->
             <form
-              action="backend/cadastro.php"
+              action="api.php?acao=cadastro"
               method="post"
               class="mt-4"
               data-validate-senha

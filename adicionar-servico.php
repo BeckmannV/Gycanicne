@@ -18,7 +18,7 @@ require __DIR__ . '/includes/topo.php';
         </header>        <div class="card bg-dark border-secondary rounded-4">
           <div class="card-body p-4">
             <!-- Salva a OS no banco pelo backend PHP e vai para o acompanhamento. -->
-            <form action="backend/adicionar-servico.php" method="post">
+            <form action="api.php?acao=adicionar-servico" method="post">
               <section class="mb-4">
                 <h3 class="h6 text-uppercase text-secondary fw-semibold mb-3">
                   <i class="bi bi-car-front"></i> Serviço

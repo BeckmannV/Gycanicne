@@ -17,7 +17,7 @@ require __DIR__ . '/includes/topo.php';
         <div class="card-body p-4">
           <h2 class="h5 fw-bold"><i class="bi bi-person-plus text-warning"></i> Cadastrar funcionário</h2>
           <!-- Salva os dados do novo funcionário no PHP. -->
-          <form action="backend/adicionar-funcionario.php" method="post" class="mt-3">
+          <form action="api.php?acao=adicionar-funcionario" method="post" class="mt-3">
             <section class="mb-4">
               <h3 class="h6 text-uppercase text-secondary fw-semibold mb-3">
                 <i class="bi bi-person"></i> Identificação

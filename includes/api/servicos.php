@@ -1,6 +1,6 @@
 <?php
 /**
- * backend/servicos.php
+ * api.php?acao=servicos
  * Retorna as OS do usuário com problemas e funcionário em UMA query (sem N+1).
  */
 session_start();

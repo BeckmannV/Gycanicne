@@ -29,7 +29,7 @@ try {
     );
 } catch (PDOException $e) {
     http_response_code(500);
-    exit('Não foi possível conectar ao banco de dados. Verifique as credenciais em backend/config.php.');
+    exit('Não foi possível conectar ao banco de dados. Verifique as credenciais em includes/api/config.php.');
 }
 
 // Garante as tabelas da versão atual caso o banco hospedado ainda não as possua.

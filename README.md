@@ -9,7 +9,7 @@ acompanhamento dos problemas identificados em cada veículo.
 - **Front-end:** HTML5, Bootstrap 5.3 (CDN), Bootstrap Icons e JavaScript puro (sem jQuery)
 - **Back-end:** PHP 8+ com PDO e sessões
 - **Banco de dados:** MySQL/MariaDB — script em `database/gycanic.sql`
-- **Integrações:** API FIPE v2 (proxy com cache local em `backend/fipe_cache/`) e
+- **Integrações:** API FIPE v2 (proxy com cache local em `includes/api/fipe_cache/`) e
   API de imagens (Wikimedia Commons)
 
 ## Estrutura do projeto
@@ -20,8 +20,9 @@ acompanhamento dos problemas identificados em cada veículo.
 | `includes/` | Layout compartilhado: `topo.php` (cabeçalho + menu), `sidebar.php`, `rodape.php` e `auth.php` (sessão) |
 | `css/style.css` | Tema escuro/laranja (antes repetido dentro de cada página) |
 | `js/main.js` | Todo o JavaScript do site (antes repetido dentro de cada página) |
-| `backend/` | Endpoints PHP: autenticação, CRUD de usuários/oficinas/serviços, upload de fotos e integração FIPE |
-| `backend/fipe_cache/` | Cache em JSON das respostas da API FIPE |
+| `api.php` | Único ponto de entrada do back-end (`api.php?acao=<nome>`) |
+| `includes/api/` | Endpoints do back-end: sessão, CRUD de usuários/oficinas/serviços, uploads e integração FIPE |
+| `includes/api/fipe_cache/` | Cache em JSON das respostas da API FIPE |
 | `database/gycanic.sql` | Criação das tabelas (`tblUsuarios`, `tblOficinas`, `tblServicos`, `tblProblemas`) |
 | `uploads/` | Fotos de perfil enviadas pelos usuários |
 | `public/banners/` | Imagens usadas nas telas |
@@ -36,7 +37,7 @@ acompanhamento dos problemas identificados em cada veículo.
    ```
 3. Crie o arquivo de credenciais a partir do modelo:
    ```bash
-   cp backend/config.example.php backend/config.php
+   cp includes/api/config.example.php includes/api/config.php
    ```
    Por padrão o bloco `local` aponta para `127.0.0.1`, banco `gycanic`,
    usuário `root` e senha vazia (padrão do XAMPP).
@@ -89,9 +90,10 @@ requisições).
 
 ## Segurança
 
-- `backend/config.php` e `.env` **não são versionados** (contêm credenciais e
-  estão no `.gitignore`). Use `backend/config.example.php` como modelo.
-- `backend/.htaccess` bloqueia o acesso direto ao `config.php` e o
+- `includes/api/config.php` e `.env` **não são versionados** (contêm credenciais
+  e estão no `.gitignore`). Use `includes/api/config.example.php` como modelo.
+- `includes/.htaccess` bloqueia o acesso direto a todos os arquivos de
+  `includes/` — o back-end só é acessível por `api.php?acao=...`, e o
   `uploads/.htaccess` impede a execução de scripts enviados pelos usuários.
 - Em produção, prefira as variáveis de ambiente `GYCANIC_DB_HOST`,
   `GYCANIC_DB_NAME`, `GYCANIC_DB_USER` e `GYCANIC_DB_PASS`, que têm prioridade

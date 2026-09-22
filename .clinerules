@@ -6,14 +6,14 @@ Sistema web acadêmico de gestão de oficinas mecânicas.
 - Páginas são `.php` na raiz e só contêm o próprio conteúdo; o layout fica em `includes/` (`topo.php`, `sidebar.php`, `rodape.php`, `auth.php`).
 - CSS único em `css/style.css` e JS único em `js/main.js` (nunca voltar a inlinar `<style>`/`<script>` nas páginas).
 - Páginas internas exigem sessão (`includes/auth.php`); `$protegida = false` libera páginas públicas.
-- Back: PHP 8 (PDO, sessões) em `backend/` (endpoints JSON) + MySQL/MariaDB.
+- Back: PHP 8 (PDO, sessões) em `includes/api/` (endpoints), sempre chamados por `api.php?acao=<nome>`; `js/main.js` faz os fetch e as páginas usam `action="api.php?acao=..."` nos formulários.
 - Banco: `database/gycanic.sql` (tblUsuarios, tblOficinas, tblServicos, tblProblemas).
 - Repo: `git@github.com:BeckmannV/Gycanicne.git` (branch `main`, push via SSH).
 - Deploy: HostGator (uploads via FTP). `larpagem/` é mini-jogo paralelo.
 
 ## Segurança (obrigatório)
-- Nunca versionar: `backend/config.php`, `.env`, `error_log`, `.ftpquota` (já no `.gitignore`).
-- Use `backend/config.example.php` como modelo de credenciais.
+- Nunca versionar: `includes/api/config.php`, `.env`, `error_log`, `.ftpquota` (o padrão `config.php` do `.gitignore` cobre qualquer pasta).
+- Use `includes/api/config.example.php` como modelo de credenciais.
 - Antes de qualquer `git push`, conferir: `git ls-tree -r --name-only HEAD | grep -iE '(^|/)(config\.php|\.env)$'`.
 
 ## Convenções

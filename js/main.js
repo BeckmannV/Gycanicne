@@ -34,13 +34,13 @@
       .replace(/'/g, '&#39;');
   }
 
-  /* Retorna a foto do veículo via backend/veiculos.php?foto= (Wikimedia Commons,
+  /* Retorna a foto do veículo via api.php?acao=veiculos&foto= (Wikimedia Commons,
    * com cache local no servidor — cobre qualquer modelo do catálogo).
    * Uso: gyVeiculoFoto(texto, function(url){ ... }); — o callback recebe a URL
    * da foto ou null. */
   function gyVeiculoFoto(texto, cb) {
     try {
-      fetch('backend/veiculos.php?foto=' + encodeURIComponent(String(texto || '')))
+      fetch('api.php?acao=veiculos&foto=' + encodeURIComponent(String(texto || '')))
         .then(function (r) { return r.json(); })
         .then(function (d) { cb(d && d.url ? d.url : null); })
         .catch(function () { cb(null); });
@@ -298,7 +298,7 @@
 
   var isProtected = body.hasAttribute('data-protected-page');
   if (isProtected) {
-    fetch('backend/auth.php', {
+    fetch('api.php?acao=auth', {
       credentials: 'same-origin',
       cache: 'no-store'
     })
@@ -324,7 +324,7 @@
   logoutBtns.forEach(function (btn) {
     btn.addEventListener('click', function (e) {
       e.preventDefault();
-      fetch('backend/logout.php', {
+      fetch('api.php?acao=logout', {
         method: 'GET',
         credentials: 'same-origin',
         cache: 'no-store'
@@ -359,7 +359,7 @@
    * ---------------------------------------------------------- */
   var sidebarUserCard = document.querySelector('[data-sidebar-user]');
   if (sidebarUserCard && !isProtected) {
-    fetch('backend/auth.php', {
+    fetch('api.php?acao=auth', {
       credentials: 'same-origin',
       cache: 'no-store'
     })
@@ -483,7 +483,7 @@ var container = painel.closest('.tab-content');
    * ---------------------------------------------------------- */
   var officeGrid = document.querySelector('[data-office-grid]');
   if (officeGrid) {
-    fetch('backend/oficinas.php', { credentials: 'same-origin' })
+    fetch('api.php?acao=oficinas', { credentials: 'same-origin' })
       .then(function (r) {
         return r.json();
       })
@@ -534,7 +534,7 @@ var container = painel.closest('.tab-content');
   var oficinaNome = document.querySelector('[data-oficina-nome]');
   var oficinaInfo = document.querySelector('[data-oficina-info]');
   if (oficinaNome || oficinaInfo) {
-    fetch('backend/oficinas.php', { credentials: 'same-origin' })
+    fetch('api.php?acao=oficinas', { credentials: 'same-origin' })
       .then(function (r) {
         return r.json();
       })
@@ -562,7 +562,7 @@ var container = painel.closest('.tab-content');
     /* Área administrativa só para gerentes. */
     var adminOnly = document.querySelector('[data-admin-only]');
     var cargoAtual = null;
-    fetch('backend/auth.php', { credentials: 'same-origin', cache: 'no-store' })
+    fetch('api.php?acao=auth', { credentials: 'same-origin', cache: 'no-store' })
       .then(function (r) {
         return r.json();
       })
@@ -632,7 +632,7 @@ var container = painel.closest('.tab-content');
     }
 
     function carregarFuncionarios() {
-      fetch('backend/funcionarios.php', { credentials: 'same-origin' })
+      fetch('api.php?acao=funcionarios', { credentials: 'same-origin' })
         .then(function (r) {
           return r.json();
         })
@@ -679,7 +679,7 @@ var container = painel.closest('.tab-content');
       var nome = del.getAttribute('data-nome-func');
       if (!window.confirm('Excluir o funcionário "' + nome + '"? Essa ação não pode ser desfeita.')) return;
       del.disabled = true;
-      fetch('backend/excluir-funcionario.php', {
+      fetch('api.php?acao=excluir-funcionario', {
         method: 'POST',
         credentials: 'same-origin',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -722,7 +722,7 @@ var container = painel.closest('.tab-content');
     }
 
     if (editId) {
-      fetch('backend/carregar-funcionario.php?id=' + encodeURIComponent(editId), {
+      fetch('api.php?acao=carregar-funcionario&id=' + encodeURIComponent(editId), {
         credentials: 'same-origin'
       })
         .then(function (r) {
@@ -761,7 +761,7 @@ var container = painel.closest('.tab-content');
       var textoOriginal = btn.innerHTML;
       btn.disabled = true;
       btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Salvando...';
-      fetch('backend/editar-funcionario.php', {
+      fetch('api.php?acao=editar-funcionario', {
         method: 'POST',
         credentials: 'same-origin',
         body: dados
@@ -813,7 +813,7 @@ var container = painel.closest('.tab-content');
 
   function preencherSelect() {
     if (!svcSelect) return;
-    fetch('backend/servicos.php', { credentials: 'same-origin' })
+    fetch('api.php?acao=servicos', { credentials: 'same-origin' })
       .then(function (r) {
         return r.json();
       })
@@ -1010,7 +1010,7 @@ var container = painel.closest('.tab-content');
           };
       btn.disabled = true;
       if (problemSubmitLabel) problemSubmitLabel.textContent = editando ? 'Salvando...' : 'Adicionando...';
-      fetch(editando ? 'backend/editar-problema.php' : 'backend/adicionar-problema.php', {
+      fetch(editando ? 'api.php?acao=editar-problema' : 'api.php?acao=adicionar-problema', {
         method: 'POST',
         credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' },
@@ -1048,7 +1048,7 @@ var container = painel.closest('.tab-content');
         if (!svcAtual) return;
         if (!window.confirm('Excluir este problema?')) return;
         delBtn.disabled = true;
-        fetch('backend/excluir-problema.php', {
+        fetch('api.php?acao=excluir-problema', {
           method: 'POST',
           credentials: 'same-origin',
           headers: { 'Content-Type': 'application/json' },
@@ -1085,7 +1085,7 @@ var container = painel.closest('.tab-content');
         var spid = statusBtn.closest('[data-problema-id]');
         if (!spid) return;
         statusBtn.disabled = true;
-        fetch('backend/atualizar-status.php', {
+        fetch('api.php?acao=atualizar-status', {
           method: 'POST',
           credentials: 'same-origin',
           headers: { 'Content-Type': 'application/json' },
@@ -1115,7 +1115,7 @@ var container = painel.closest('.tab-content');
    * ---------------------------------------------------------- */
   var funcSelect = document.getElementById('funcionario_id');
   if (funcSelect) {
-    fetch('backend/funcionarios.php', { credentials: 'same-origin' })
+    fetch('api.php?acao=funcionarios', { credentials: 'same-origin' })
       .then(function (r) {
         return r.json();
       })
@@ -1191,7 +1191,7 @@ var container = painel.closest('.tab-content');
     }
 
     /* Marcas (uma vez por página; backend cacheia por 7 dias). */
-    fetch('backend/fipe.php?recurso=marcas', { credentials: 'same-origin' })
+    fetch('api.php?acao=fipe&recurso=marcas', { credentials: 'same-origin' })
       .then(function (r) { return r.json(); })
       .then(function (marcas) {
         if (!Array.isArray(marcas)) return;
@@ -1219,7 +1219,7 @@ var container = painel.closest('.tab-content');
       vModelo.disabled = true;
       vModelo.placeholder = 'Carregando modelos…';
       var requicao = id;
-      fetch('backend/fipe.php?recurso=modelos&marca=' + id, { credentials: 'same-origin' })
+      fetch('api.php?acao=fipe&recurso=modelos&marca=' + id, { credentials: 'same-origin' })
         .then(function (r) { return r.json(); })
         .then(function (modelos) {
           if (parseInt(vMarca.value, 10) !== requicao) return; // resposta antiga
@@ -1257,7 +1257,7 @@ var container = painel.closest('.tab-content');
       var requisicao = { marca: marcaId, modelo: nome };
       vAno.innerHTML = '<option value="">Carregando anos…</option>';
       vAno.disabled = true;
-      fetch('backend/fipe.php?recurso=anos&marca=' + marcaId + '&modelo=' + encontrado.id, { credentials: 'same-origin' })
+      fetch('api.php?acao=fipe&recurso=anos&marca=' + marcaId + '&modelo=' + encontrado.id, { credentials: 'same-origin' })
         .then(function (r) { return r.json(); })
         .then(function (anos) {
           if (String(vModelo.value || '').trim() !== requisicao.modelo) return;
@@ -1294,7 +1294,7 @@ var container = painel.closest('.tab-content');
       vLoadingImg.hidden = false;
       if (vImg) vImg.removeAttribute('src');
       var requisicao = marcaId + '_' + modeloAtual.id + '_' + anoId;
-      fetch('backend/fipe.php?recurso=veiculo&marca=' + marcaId + '&modelo=' + modeloAtual.id + '&ano=' + encodeURIComponent(anoId), { credentials: 'same-origin' })
+      fetch('api.php?acao=fipe&recurso=veiculo&marca=' + marcaId + '&modelo=' + modeloAtual.id + '&ano=' + encodeURIComponent(anoId), { credentials: 'same-origin' })
         .then(function (r) { return r.json(); })
         .then(function (v) {
           if (marcaId + '_' + modeloAtual.id + '_' + anoId !== requisicao) return;
@@ -1340,7 +1340,7 @@ var container = painel.closest('.tab-content');
       profileAlert.className = ok ? 'alert alert-success' : 'alert alert-danger';
     }
 
-    fetch('backend/perfil.php', { credentials: 'same-origin' })
+    fetch('api.php?acao=perfil', { credentials: 'same-origin' })
       .then(function (r) {
         if (!r.ok) throw new Error('http');
         return r.json();
@@ -1401,7 +1401,7 @@ var container = painel.closest('.tab-content');
       var texto = btn.innerHTML;
       btn.disabled = true;
       btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Salvando...';
-      fetch('backend/perfil.php', {
+      fetch('api.php?acao=perfil', {
         method: 'POST',
         credentials: 'same-origin',
         body: dados
@@ -1452,7 +1452,7 @@ var container = painel.closest('.tab-content');
       var texto = btn.innerHTML;
       btn.disabled = true;
       btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Salvando...';
-      fetch('backend/perfil.php', {
+      fetch('api.php?acao=perfil', {
         method: 'POST',
         credentials: 'same-origin',
         body: dados
@@ -1487,7 +1487,7 @@ var container = painel.closest('.tab-content');
   var homeDash = document.querySelector('[data-home-dash]');
   var recentOs = document.querySelector('[data-recent-os]');
 
-  fetch('backend/stats.php', { credentials: 'same-origin' })
+  fetch('api.php?acao=stats', { credentials: 'same-origin' })
     .then(function (r) {
       return r.json();
     })
@@ -1499,7 +1499,7 @@ var container = painel.closest('.tab-content');
     .catch(function () { /* mantém os placeholders */ });
 
   if (homeDash && recentOs) {
-    fetch('backend/servicos.php', { credentials: 'same-origin' })
+    fetch('api.php?acao=servicos', { credentials: 'same-origin' })
       .then(function (r) {
         if (!r.ok) throw new Error('nao_autenticado');
         return r.json();
@@ -1568,7 +1568,7 @@ var container = painel.closest('.tab-content');
 
     function carregarListaServicos() {
       svcListaEl.innerHTML = '<li class="list-group-item text-secondary">Carregando…</li>';
-      fetch('backend/servicos.php', { credentials: 'same-origin' })
+      fetch('api.php?acao=servicos', { credentials: 'same-origin' })
         .then(function (r) {
           return r.json();
         })
@@ -1590,7 +1590,7 @@ var container = painel.closest('.tab-content');
       var nome = item ? item.querySelector('strong').textContent : 'este serviço';
       if (!window.confirm('Remover "' + nome + '"? Esta ação não pode ser desfeita.')) return;
       delBtn.disabled = true;
-      fetch('backend/excluir-servico.php', {
+      fetch('api.php?acao=excluir-servico', {
         method: 'POST',
         credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' },

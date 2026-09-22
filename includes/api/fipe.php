@@ -1,14 +1,14 @@
 <?php
 /**
- * backend/fipe.php
+ * api.php?acao=fipe
  * Proxy da API FIPE v2 (https://fipe.parallelum.com.br/api/v2) com cache local
  * e suporte a token opcional via .env (FIPE_API_TOKEN).
  *
  * Endpoints:
- *   GET backend/fipe.php?recurso=marcas
- *   GET backend/fipe.php?recurso=modelos&marca=59
- *   GET backend/fipe.php?recurso=anos&marca=59&modelo=5940
- *   GET backend/fipe.php?recurso=veiculo&marca=59&modelo=5940&ano=2014-3
+ *   GET api.php?acao=fipe&recurso=marcas
+ *   GET api.php?acao=fipe&recurso=modelos&marca=59
+ *   GET api.php?acao=fipe&recurso=anos&marca=59&modelo=5940
+ *   GET api.php?acao=fipe&recurso=veiculo&marca=59&modelo=5940&ano=2014-3
  */
 session_start();
 header('Content-Type: application/json; charset=utf-8');
@@ -22,7 +22,7 @@ if (!isset($_SESSION['usuario_id'])) {
 
 // --- .env (opcional) ------------------------------------------------
 $env = [];
-$envFile = dirname(__DIR__) . '/.env';
+$envFile = dirname(__DIR__, 2) . '/.env';
 if (is_file($envFile)) {
     foreach (file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $linha) {
         $linha = trim($linha);

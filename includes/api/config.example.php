@@ -3,11 +3,11 @@
  * Modelo de configuração do banco por ambiente.
  *
  * COMO USAR:
- *   1. Copie este arquivo para "backend/config.php":
- *        cp backend/config.example.php backend/config.php
+ *   1. Copie este arquivo para "includes/api/config.php":
+ *        cp includes/api/config.example.php includes/api/config.php
  *   2. Preencha o bloco 'production' (e o 'local', se necessário).
  *
- * O arquivo "backend/config.php" contém credenciais reais e por isso está
+ * O arquivo "includes/api/config.php" contém credenciais reais e por isso está
  * no .gitignore — ele nunca é enviado para o repositório.
  *
  * O arquivo db.php escolhe automaticamente entre local e produção:

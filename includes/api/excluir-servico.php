@@ -1,6 +1,6 @@
 <?php
 /**
- * backend/excluir-servico.php
+ * api.php?acao=excluir-servico
  * Exclui uma OS (e seus problemas, via CASCADE) do usuário logado.
  */
 session_start();

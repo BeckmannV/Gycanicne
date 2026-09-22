@@ -3,7 +3,7 @@
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_SESSION['usuario_id'])) {
-    header('Location: ../adicionar-servico.php?erro=acesso');
+    header('Location: adicionar-servico.php?erro=acesso');
     exit;
 }
 
@@ -25,7 +25,7 @@ $servico = trim((string) filter_input(INPUT_POST, 'servico', FILTER_SANITIZE_SPE
 $funcionarioId = (int) filter_input(INPUT_POST, 'funcionario_id', FILTER_SANITIZE_NUMBER_INT);
 
 if ($titulo === '') {
-    header('Location: ../adicionar-servico.php?erro=campos_vazios');
+    header('Location: adicionar-servico.php?erro=campos_vazios');
     exit;
 }
 
@@ -60,5 +60,5 @@ $stmt->execute([
     ':funcionario_id' => $funcionarioId,
 ]);
 
-header('Location: ../servicos.php?sucesso=os_criada');
+header('Location: servicos.php?sucesso=os_criada');
 exit;

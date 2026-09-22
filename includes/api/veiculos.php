@@ -1,10 +1,10 @@
 <?php
 // Catálogo de veículos. Com ?q= busca localmente no índice (marca + modelo)
 // gerado por build-catalogo.php. Sem ?q=, faz proxy da API pública da FIPE.
-//   GET backend/veiculos.php?q=polo              → sugestões de marca+modelo
-//   GET backend/veiculos.php                      → marcas (FIPE)
-//   GET backend/veiculos.php?marca=59             → modelos da marca (FIPE)
-//   GET backend/veiculos.php?marca=59&modelo=5585 → versões/anos (FIPE)
+//   GET api.php?acao=veiculos&q=polo              → sugestões de marca+modelo
+//   GET api.php?acao=veiculos                      → marcas (FIPE)
+//   GET api.php?acao=veiculos&marca=59             → modelos da marca (FIPE)
+//   GET api.php?acao=veiculos&marca=59&modelo=5585 → versões/anos (FIPE)
 session_start();
 header('Content-Type: application/json; charset=utf-8');
 

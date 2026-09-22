@@ -3,13 +3,13 @@
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_SESSION['usuario_id'])) {
-    header('Location: ../login.php?erro=acesso');
+    header('Location: login.php?erro=acesso');
     exit;
 }
 
 $permite = ['gerente'];
 if (!in_array($_SESSION['usuario_tipo'] ?? 'funcionario', $permite, true)) {
-    header('Location: ../funcionarios.php?erro=sem_permissao');
+    header('Location: funcionarios.php?erro=sem_permissao');
     exit;
 }
 
@@ -21,18 +21,18 @@ $senha = $_POST['senha'] ?? '';
 $cargo = ($_POST['cargo'] ?? 'funcionario') === 'gerente' ? 'gerente' : 'funcionario';
 
 if ($nome === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || $senha === '') {
-    header('Location: ../funcionarios.php?erro=campos_vazios');
+    header('Location: funcionarios.php?erro=campos_vazios');
     exit;
 }
 if (strlen($senha) < 6) {
-    header('Location: ../funcionarios.php?erro=senha_curta');
+    header('Location: funcionarios.php?erro=senha_curta');
     exit;
 }
 
 $verifica = $pdo->prepare('SELECT id FROM tblUsuarios WHERE email = :email LIMIT 1');
 $verifica->execute([':email' => $email]);
 if ($verifica->fetch()) {
-    header('Location: ../funcionarios.php?erro=email_existe');
+    header('Location: funcionarios.php?erro=email_existe');
     exit;
 }
 
@@ -59,5 +59,5 @@ $stmt->execute([
     ':uf' => vazio($_POST['uf'] ?? '') ? null : strtoupper(trim($_POST['uf'])),
     ':cep' => vazio($_POST['cep'] ?? '') ? null : preg_replace('/\D/', '', $_POST['cep']),
 ]);
-header('Location: ../funcionarios.php?sucesso=funcionario_criado');
+header('Location: funcionarios.php?sucesso=funcionario_criado');
 exit;
